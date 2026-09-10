@@ -1,6 +1,5 @@
 # Directorios de compilación
 build/
-fake_root/
 
 # Código fuente descargado
 libarchive_moria/
@@ -8,9 +7,6 @@ moria/
 
 # Objetos y binarios
 *.o
-*.so
-*.so.*
-*.a
 *.dylib
 
 # CMake
@@ -33,3 +29,4 @@ Makefile
 # OS
 .DS_Store
 Thumbs.db
+libs/
