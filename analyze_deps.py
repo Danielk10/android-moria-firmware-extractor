@@ -2,7 +2,7 @@ import subprocess
 import os
 import glob
 
-# Paths relative to current directory (assuming script is inside android-moria-firmware-extractor)
+# Paths relative to current directory (assuming script is inside moria-firmware-extractor)
 binaries = [
     'fake_root/data/data/com.diamon.moria/files/usr/bin/moria'
 ]

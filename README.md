@@ -1,10 +1,10 @@
-# Android Moria Firmware Extractor
+# Moria Firmware Extractor
 
 <p align="center">
   <img src="logo.png" width="160" alt="Moria Firmware Extractor Logo">
 </p>
 
-Scripts de compilación cruzada y aplicación Android para **Moria** (extractor y analizador forense de firmware) y su dependencia **libarchive** con interfaz táctil y consola de terminal integrada.
+Scripts de compilación cruzada y aplicación para **Moria** (extractor y analizador forense de firmware) y su dependencia **libarchive** con interfaz táctil y consola de terminal integrada.
 
 ## Descripción
 
@@ -13,7 +13,7 @@ Este repositorio contiene los scripts necesarios para compilar desde el código 
 - **libarchive**: Biblioteca multiplataforma para lectura y escritura de archivos comprimidos y empaquetados.
 - **Moria**: Herramienta de extracción y análisis de firmware embebido.
 
-Ambos binarios se compilan con un prefijo de instalación exclusivo para la aplicación Android `com.diamon.moria`, garantizando que las bibliotecas y ejecutables no interfieran con otros paquetes del sistema.
+Ambos binarios se compilan con un prefijo de instalación exclusivo para la aplicación `com.diamon.moria`, garantizando que las bibliotecas y ejecutables no interfieran con otros paquetes del sistema.
 
 ## Características
 
