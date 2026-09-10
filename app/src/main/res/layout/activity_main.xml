@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    tools:context=".ui.activities.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <!-- Fila 1: Selección de Archivo Objetivo y Exportar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="3dp">
+
+            <Button
+                android:id="@+id/btnSelectTarget"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1.2"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/btn_select_target"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_blue" />
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnExportDownloads"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/menu_export_downloads"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_grey" />
+        </LinearLayout>
+
+        <!-- Indicador de Archivo Objetivo Seleccionado -->
+        <TextView
+            android:id="@+id/tvTarget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/target_none"
+            android:textColor="@color/secondary"
+            android:textSize="11sp"
+            android:fontFamily="monospace"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:layout_marginBottom="3dp" />
+
+        <!-- Botones de Acción de Moria: Fila 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="3dp">
+
+            <Button
+                android:id="@+id/btnIdentify"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/btn_identify"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_teal" />
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnExtract"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/btn_extract"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_green" />
+        </LinearLayout>
+
+        <!-- Botones de Acción de Moria: Fila 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="3dp">
+
+            <Button
+                android:id="@+id/btnCarve"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/btn_carve"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_purple" />
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnEntropy"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/btn_entropy"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_orange" />
+        </LinearLayout>
+
+        <!-- Botones de Acción de Moria: Fila 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="3dp">
+
+            <Button
+                android:id="@+id/btnList"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/btn_list"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_blue" />
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnScanAll"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/btn_scan_all"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_darkred" />
+        </LinearLayout>
+
+        <!-- Fila de Opciones / Flags -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="3dp">
+
+            <CheckBox
+                android:id="@+id/cbJson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="32dp"
+                android:text="@string/cb_json"
+                android:textColor="#E0E0E0"
+                android:textSize="11sp" />
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/cbBroad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="32dp"
+                android:text="@string/cb_broad"
+                android:textColor="#E0E0E0"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Barra de Entrada de Comandos Personalizados -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp">
+
+            <EditText
+                android:id="@+id/etCommand"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="#1B1E2B"
+                android:fontFamily="monospace"
+                android:hint="@string/str_hint_comando"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#4DB6AC"
+                android:textColorHint="#757575"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnRun"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="4dp"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/str_enviar"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_blue" />
+        </LinearLayout>
+
+        <!-- Barra de Controles Rápidos de Terminal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp">
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/str_status_ready"
+                android:textColor="#4CAF50"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_gravity="center_vertical"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/btnAbort"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/str_detener"
+                android:textColor="@color/btn_text_color"
+                android:textSize="11sp"
+                android:visibility="gone"
+                app:backgroundTint="@color/btn_tint_darkred"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnCopy"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/str_copiar"
+                android:textColor="@color/btn_text_color"
+                android:textSize="11sp"
+                app:backgroundTint="@color/btn_tint_grey"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/str_limpiar"
+                android:textColor="@color/btn_text_color"
+                android:textSize="11sp"
+                app:backgroundTint="@color/btn_tint_grey" />
+        </LinearLayout>
+
+        <!-- Consola de Salida UNIX / Terminal -->
+        <com.diamon.moria.ui.views.LogScrollView
+            android:id="@+id/scrollLog"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:background="#0A0E17"
+            android:descendantFocusability="blocksDescendants"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/tvLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:lineSpacingExtra="2dp"
+                android:longClickable="true"
+                android:textColor="#00FF00"
+                android:textIsSelectable="true"
+                android:textSize="12sp"
+                android:text="--- Moria Firmware Extractor Terminal ---\nType 'help' for available commands.\n\n" />
+
+        </com.diamon.moria.ui.views.LogScrollView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

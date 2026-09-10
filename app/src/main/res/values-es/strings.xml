@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Moria Firmware Extractor</string>
+    <string name="menu_set_working_dir">Seleccionar Carpeta de Trabajo</string>
+    <string name="menu_import_file">Importar Archivo al Espacio de Trabajo</string>
+    <string name="menu_export_downloads">Exportar Archivos a Descargas</string>
+    <string name="menu_copy_logs">Copiar Registros al Portapapeles</string>
+    <string name="menu_clear_terminal">Limpiar Terminal</string>
+    <string name="str_polticas_de_pri">Políticas de Privacidad</string>
+    <string name="str_acerca_de">Acerca de y Licencias</string>
+    <string name="str_terminal_salida">Consola de Terminal</string>
+    <string name="str_detener">Detener</string>
+    <string name="str_limpiar">Limpiar</string>
+    <string name="str_copiar">Copiar</string>
+    <string name="str_enviar">Ejecutar</string>
+    <string name="str_close">Cerrar</string>
+    <string name="str_hint_comando">Ej: moria -e firmware.bin | ls -l | cat</string>
+    <string name="str_working_dir_label">Espacio: %1$s</string>
+    <string name="str_logs_copied">Registros copiados al portapapeles.</string>
+    <string name="str_no_logs_to_copy">No hay registros para copiar.</string>
+    <string name="str_export_success">%1$d archivo(s) exportados a Descargas/%2$s</string>
+    <string name="str_export_none">No se encontraron archivos para exportar en el espacio actual.</string>
+    <string name="str_file_imported">Archivo importado con éxito: %1$s (%2$s)</string>
+    <string name="str_file_import_error">Error al importar archivo: %1$s</string>
+    <string name="str_status_ready">Listo</string>
+    <string name="str_status_running">Ejecutando: %1$s</string>
+
+    <!-- UI Buttons & Controls for Moria -->
+    <string name="btn_select_target">Seleccionar Firmware</string>
+    <string name="btn_identify">Identificar</string>
+    <string name="btn_extract">Extraer Todo (-e)</string>
+    <string name="btn_carve">Carve / Cortar (-c)</string>
+    <string name="btn_entropy">Entropía (-E)</string>
+    <string name="btn_list">Listar Contenido</string>
+    <string name="btn_scan_all">Escanear Todo (-A)</string>
+    <string name="cb_json">Salida JSON (-j)</string>
+    <string name="cb_broad">Formatos amplios (--broad)</string>
+    <string name="target_none">Objetivo: Ningún archivo seleccionado (Toca para seleccionar)</string>
+    <string name="target_selected">Objetivo: %1$s (%2$s)</string>
+    <string name="select_target_prompt">Seleccione primero un archivo de firmware.</string>
+
+    <string name="str_about_html"><![CDATA[<h2>Moria Firmware Extractor</h2><p>Aplicación Android avanzada para extracción forense de firmware, desempaquetado de contenedores, descompresión de imágenes y hacking electrónico mediante <b>moria</b> nativo y <b>libarchive</b>.</p><hr/><b>Licencia del proyecto:</b> Apache 2.0<br/><b>Autor:</b> Daniel Elias Diamon Vazquez<br/><b>GitHub:</b> <a href="https://github.com/Danielk10/android-moria-firmware-extractor">android-moria-firmware-extractor</a><br/><br/><b>Componentes y Bibliotecas de Terceros:</b><br/>• <a href="https://github.com/nmatt0/moria">moria</a> por nmatt0 (Apache 2.0 / BSD)<br/>• <a href="https://github.com/libarchive/libarchive">libarchive</a> (BSD 2-Clause)<br/>• <b>bsdunzip</b> (BSD 2-Clause)<br/>• Runtimes de compresión: lz4, lzma, zlib, zstd, openssl crypto, xml2, acl.<br/>]]></string>
+</resources>

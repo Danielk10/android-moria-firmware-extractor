@@ -1,6 +1,10 @@
 # Android Moria Firmware Extractor
 
-Scripts de compilación cruzada para construir **Moria** (extractor de firmware) y su dependencia **libarchive** directamente en Android mediante Termux, con aislamiento total de paquete, alineación de páginas de 16 KB y RPATH exclusivo.
+<p align="center">
+  <img src="logo.png" width="160" alt="Moria Firmware Extractor Logo">
+</p>
+
+Scripts de compilación cruzada y aplicación Android para **Moria** (extractor y analizador forense de firmware) y su dependencia **libarchive** con interfaz táctil y consola de terminal integrada.
 
 ## Descripción
 

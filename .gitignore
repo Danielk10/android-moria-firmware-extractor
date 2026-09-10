@@ -29,3 +29,14 @@ Makefile
 # OS
 .DS_Store
 Thumbs.db
+
+# Android
+.gradle/
+local.properties
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+keystore.properties
+*.jks
+*.keystore
