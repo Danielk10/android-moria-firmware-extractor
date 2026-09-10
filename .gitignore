@@ -29,4 +29,3 @@ Makefile
 # OS
 .DS_Store
 Thumbs.db
-libs/
