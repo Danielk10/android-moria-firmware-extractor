@@ -165,7 +165,7 @@ public class TerminalExecutor {
     private void executeCd(String[] tokens) {
         if (tokens.length < 2 || tokens[1].equals("~")) {
             currentWorkDir = context.getFilesDir();
-            postOutput("Directorio de trabajo: " + currentWorkDir.getAbsolutePath() + "\n");
+            postOutput(context.getString(R.string.terminal_cd_workdir, currentWorkDir.getAbsolutePath()));
             postFinished(0);
             return;
         }
@@ -186,7 +186,7 @@ public class TerminalExecutor {
             postOutput(currentWorkDir.getAbsolutePath() + "\n");
             postFinished(0);
         } else {
-            postOutput("cd: no existe el directorio: " + target + "\n");
+            postOutput(context.getString(R.string.terminal_cd_not_dir, target));
             postFinished(1);
         }
     }
@@ -206,14 +206,14 @@ public class TerminalExecutor {
         }
 
         if (!dir.exists() || !dir.isDirectory()) {
-            postOutput("ls: no se puede acceder a '" + dir.getName() + "': No existe el directorio\n");
+            postOutput(context.getString(R.string.terminal_ls_cannot_access, dir.getName()));
             postFinished(1);
             return;
         }
 
         File[] files = dir.listFiles();
         if (files == null || files.length == 0) {
-            postOutput("(directorio vacio)\n");
+            postOutput(context.getString(R.string.terminal_ls_empty));
             postFinished(0);
             return;
         }
@@ -234,7 +234,7 @@ public class TerminalExecutor {
             sb.append(String.format(Locale.US, "%s%s%s%s %8s  %s  %s\n", type, r, w, x, size, date, f.getName()));
         }
         if (sb.length() == 0) {
-            postOutput("(directorio vacio)\n");
+            postOutput(context.getString(R.string.terminal_ls_empty));
         } else {
             postOutput(sb.toString());
         }
@@ -250,23 +250,23 @@ public class TerminalExecutor {
 
     private void executeCat(String[] tokens) {
         if (tokens.length < 2) {
-            postOutput("Uso: cat <archivo>\n");
+            postOutput(context.getString(R.string.terminal_cat_usage));
             postFinished(1);
             return;
         }
         File f = resolveFile(tokens[1]);
         if (!f.exists() || !f.isFile()) {
-            postOutput("cat: " + tokens[1] + ": Archivo no encontrado\n");
+            postOutput(context.getString(R.string.terminal_cat_not_found, tokens[1]));
             postFinished(1);
             return;
         }
         if (FileManager.shouldIgnore(f)) {
-            postOutput("cat: " + tokens[1] + ": Archivo protegido del sistema\n");
+            postOutput(context.getString(R.string.terminal_cat_protected, tokens[1]));
             postFinished(1);
             return;
         }
         if (f.length() > 2 * 1024 * 1024) {
-            postOutput("cat: El archivo es demasiado grande para mostrar (> 2 MB)\n");
+            postOutput(context.getString(R.string.terminal_cat_too_large));
             postFinished(1);
             return;
         }
@@ -278,14 +278,14 @@ public class TerminalExecutor {
             }
             postFinished(0);
         } catch (IOException e) {
-            postOutput("cat: Error leyendo archivo: " + e.getMessage() + "\n");
+            postOutput(context.getString(R.string.terminal_cat_error, e.getMessage()));
             postFinished(1);
         }
     }
 
     private void executeTouch(String[] tokens) {
         if (tokens.length < 2) {
-            postOutput("Uso: touch <archivo>\n");
+            postOutput(context.getString(R.string.terminal_touch_usage));
             postFinished(1);
             return;
         }
@@ -297,7 +297,7 @@ public class TerminalExecutor {
                     parent.mkdirs();
                 }
                 if (f.createNewFile()) {
-                    postOutput("Creado: " + f.getName() + "\n");
+                    postOutput(context.getString(R.string.terminal_touch_created, f.getName()));
                     postFinished(0);
                     return;
                 }
@@ -307,7 +307,7 @@ public class TerminalExecutor {
                 return;
             }
         } catch (IOException e) {
-            postOutput("touch: error: " + e.getMessage() + "\n");
+            postOutput(context.getString(R.string.terminal_touch_error, e.getMessage()));
             postFinished(1);
             return;
         }
@@ -315,7 +315,7 @@ public class TerminalExecutor {
 
     private void executeRm(String[] tokens) {
         if (tokens.length < 2) {
-            postOutput("Uso: rm [-r|-rf] <archivo o directorio>\n");
+            postOutput(context.getString(R.string.terminal_rm_usage));
             postFinished(1);
             return;
         }
@@ -331,36 +331,36 @@ public class TerminalExecutor {
         }
 
         if (targetName == null) {
-            postOutput("Uso: rm [-r|-rf] <archivo o directorio>\n");
+            postOutput(context.getString(R.string.terminal_rm_usage));
             postFinished(1);
             return;
         }
 
         File f = resolveFile(targetName);
         if (!f.exists()) {
-            postOutput("rm: no se puede borrar '" + targetName + "': No existe el archivo o carpeta\n");
+            postOutput(context.getString(R.string.terminal_rm_not_found, targetName));
             postFinished(1);
             return;
         }
 
         if (FileManager.shouldIgnore(f)) {
-            postOutput("rm: no se puede borrar '" + targetName + "': Archivo o directorio protegido del sistema\n");
+            postOutput(context.getString(R.string.terminal_rm_protected, targetName));
             postFinished(1);
             return;
         }
 
         if (f.isDirectory() && !recursive) {
-            postOutput("rm: '" + targetName + "' es un directorio (use 'rm -r' o 'rm -rf')\n");
+            postOutput(context.getString(R.string.terminal_rm_is_dir, targetName));
             postFinished(1);
             return;
         }
 
         boolean ok = recursive ? deleteRecursively(f) : f.delete();
         if (ok) {
-            postOutput("Eliminado: " + f.getName() + "\n");
+            postOutput(context.getString(R.string.terminal_rm_deleted, f.getName()));
             postFinished(0);
         } else {
-            postOutput("rm: no se pudo eliminar " + f.getName() + "\n");
+            postOutput(context.getString(R.string.terminal_rm_failed, f.getName()));
             postFinished(1);
         }
     }
@@ -380,7 +380,7 @@ public class TerminalExecutor {
 
     private void executeMkdir(String[] tokens) {
         if (tokens.length < 2) {
-            postOutput("Uso: mkdir [-p] <directorio>\n");
+            postOutput(context.getString(R.string.terminal_mkdir_usage));
             postFinished(1);
             return;
         }
@@ -396,24 +396,24 @@ public class TerminalExecutor {
         }
 
         if (dirName == null) {
-            postOutput("Uso: mkdir [-p] <directorio>\n");
+            postOutput(context.getString(R.string.terminal_mkdir_usage));
             postFinished(1);
             return;
         }
 
         File d = resolveFile(dirName);
         if (d.exists()) {
-            postOutput("mkdir: no se puede crear el directorio '" + dirName + "': Ya existe\n");
+            postOutput(context.getString(R.string.terminal_mkdir_exists, dirName));
             postFinished(1);
             return;
         }
 
         boolean ok = makeParents ? d.mkdirs() : d.mkdir();
         if (ok) {
-            postOutput("Directorio creado: " + d.getName() + "\n");
+            postOutput(context.getString(R.string.terminal_mkdir_created, d.getName()));
             postFinished(0);
         } else {
-            postOutput("mkdir: no se pudo crear " + d.getName() + "\n");
+            postOutput(context.getString(R.string.terminal_mkdir_failed, d.getName()));
             postFinished(1);
         }
     }
@@ -434,7 +434,7 @@ public class TerminalExecutor {
         }
 
         if (srcPath == null || dstPath == null) {
-            postOutput("Uso: cp [-r] <origen> <destino>\n");
+            postOutput(context.getString(R.string.terminal_cp_usage));
             postFinished(1);
             return;
         }
@@ -442,13 +442,13 @@ public class TerminalExecutor {
         File src = resolveFile(srcPath);
         File dst = resolveFile(dstPath);
         if (!src.exists()) {
-            postOutput("cp: origen no existe: " + srcPath + "\n");
+            postOutput(context.getString(R.string.terminal_cp_not_found, srcPath));
             postFinished(1);
             return;
         }
 
         if (src.isDirectory() && !recursive) {
-            postOutput("cp: omitiendo directorio '" + srcPath + "' (use 'cp -r')\n");
+            postOutput(context.getString(R.string.terminal_cp_omitting_dir, srcPath));
             postFinished(1);
             return;
         }
@@ -459,10 +459,10 @@ public class TerminalExecutor {
 
         boolean ok = recursive ? copyRecursively(src, dst) : copySingleFile(src, dst);
         if (ok) {
-            postOutput("Copiado: " + src.getName() + " -> " + dst.getName() + "\n");
+            postOutput(context.getString(R.string.terminal_cp_copied, src.getName(), dst.getName()));
             postFinished(0);
         } else {
-            postOutput("cp: error al copiar " + src.getName() + "\n");
+            postOutput(context.getString(R.string.terminal_cp_error, src.getName()));
             postFinished(1);
         }
     }
@@ -543,7 +543,7 @@ public class TerminalExecutor {
         }
 
         if (executableFile == null || !executableFile.exists()) {
-            postOutput("Comando no reconocido: " + binaryName + "\nEscriba 'help' o '?' para ver los comandos disponibles.\n");
+            postOutput(context.getString(R.string.terminal_unrecognized_cmd, binaryName));
             postFinished(127);
             return;
         }
@@ -626,39 +626,7 @@ public class TerminalExecutor {
     }
 
     private void printSandboxHelp() {
-        String help = "======================================================\n"
-                + "  Terminal Sandbox - Comandos del Entorno\n"
-                + "======================================================\n\n"
-                + "COMANDOS INTEGRADOS DEL SANDBOX:\n"
-                + "  ls [-a] [dir]           Listar archivos y directorios\n"
-                + "  pwd                     Mostrar ruta del directorio actual\n"
-                + "  cd <dir>                Cambiar directorio ('cd ~' para inicio)\n"
-                + "  cat <archivo>           Ver contenido de un archivo de texto\n"
-                + "  touch <archivo>         Crear archivo vacío o actualizar fecha\n"
-                + "  mkdir [-p] <dir>        Crear un nuevo directorio\n"
-                + "  rm [-r|-rf] <objetivo>  Eliminar archivo o directorio\n"
-                + "  cp [-r] <origen> <dst>  Copiar archivo o directorio\n"
-                + "  echo <texto>            Imprimir texto en la terminal\n"
-                + "  clear / cls             Limpiar el historial de la pantalla\n"
-                + "  help / ?                Mostrar esta ayuda del sandbox\n\n"
-                + "======================================================\n"
-                + "  EJECUCIÓN DEL BINARIO NATIVO REAL (MORIA)\n"
-                + "======================================================\n"
-                + "Desde la caja de comandos inferior puede ejecutar directamente\n"
-                + "el binario nativo real con cualquier comando u opción:\n\n"
-                + "  moria [opciones] <archivo|directorio>\n\n"
-                + "EJEMPLOS:\n"
-                + "  moria firmware.bin          Identificar firmware\n"
-                + "  moria -e firmware.bin       Extraer sistemas de archivos\n"
-                + "  moria -c firmware.bin       Cortar (carve) flujos de bytes\n"
-                + "  moria -A firmware.bin       Inspección profunda completa\n"
-                + "  moria -E firmware.bin       Análisis de entropía\n"
-                + "  moria --list firmware.bin   Listar contenidos sin extraer\n"
-                + "  moria -e file.bin | grep sq Tuberías y filtros shell\n\n"
-                + "Para ver la ayuda nativa completa del binario Moria, ejecute:\n"
-                + "  moria --help\n"
-                + "======================================================\n";
-        postOutput(help);
+        postOutput(context.getString(R.string.terminal_sandbox_help));
     }
 
     private File resolveFile(String path) {

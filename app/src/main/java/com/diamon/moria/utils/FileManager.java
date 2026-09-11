@@ -49,7 +49,7 @@ public class FileManager {
                 }
             }
         }
-        return result != null ? result : "archivo_importado.bin";
+        return result != null ? result : "imported_file.bin";
     }
 
     public static boolean copyUriToFile(Context context, Uri sourceUri, File destFile) {

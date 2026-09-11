@@ -52,7 +52,7 @@
 
     <!-- About & Licenses Unified Dialog -->
     <string name="about_licenses_dialog_title">Acerca de y Licencias</string>
-    <string name="str_about_licenses_html"><![CDATA[<h2>Moria Firmware Extractor</h2><p>Aplicación avanzada para inspección forense de imágenes de firmware, extracción profunda de contenedores, descompresión de sistemas de archivos y análisis de entropía mediante <b>moria</b> nativo y <b>libarchive</b>.</p><p><b>Flujo de Trabajo (Pipeline):</b><br/><code>moria -e firmware.bin &rarr; mithril firmware.bin.extracted/</code></p><hr/><b>Autor de la aplicación Android:</b><br/>Daniel Elias Diamon Vazquez<br/><br/><b>Herramienta CLI original:</b><br/><b>moria</b> desarrollada por <b>nmatt0</b> &mdash; Licencia Apache 2.0 / BSD<br/><a href="https://github.com/nmatt0/moria">https://github.com/nmatt0/moria</a><br/><br/><b>Licencia del proyecto Android:</b> Apache License 2.0<br/><b>Repositorio GitHub:</b> <a href="https://github.com/Danielk10/android-moria-firmware-extractor">Danielk10/android-moria-firmware-extractor</a><br/><hr/><h3>Licencias de Código Abierto</h3><p>Este software integra los siguientes componentes y bibliotecas de código abierto:</p><ul><li><b>Moria CLI</b> &mdash; Apache License 2.0 / BSD (<a href="https://github.com/nmatt0/moria">nmatt0/moria</a>)</li><li><b>libarchive</b> &mdash; Licencia BSD 2-Cláusulas (<a href="https://github.com/libarchive/libarchive">libarchive.org</a>)</li><li><b>bsdunzip</b> &mdash; Licencia BSD 2-Cláusulas</li><li><b>ICU (Unicode Components)</b> &mdash; Licencia Unicode / ICU (<a href="https://icu.unicode.org">icu.unicode.org</a>)</li><li><b>OpenSSL / libcrypto</b> &mdash; Licencia Apache 2.0 (<a href="https://www.openssl.org">openssl.org</a>)</li><li><b>Zstandard (libzstd)</b> &mdash; Licencia BSD 3-Cláusulas (<a href="https://facebook.github.io/zstd/">facebook/zstd</a>)</li><li><b>LZ4 (liblz4)</b> &mdash; Licencia BSD 2-Cláusulas (<a href="https://lz4.org">lz4.org</a>)</li><li><b>XZ / liblzma</b> &mdash; Dominio Público / LGPL 2.1 (<a href="https://tukaani.org/xz/">tukaani.org/xz</a>)</li><li><b>zlib</b> &mdash; Licencia zlib (<a href="https://zlib.net">zlib.net</a>)</li><li><b>libxml2</b> &mdash; Licencia MIT (<a href="https://gitlab.gnome.org/GNOME/libxml2">xmlsoft.org</a>)</li><li><b>libiconv y libcharset</b> &mdash; Licencia LGPL 2.1</li><li><b>libacl</b> &mdash; Licencia LGPL 2.1</li></ul>]]></string>
+    <string name="str_about_licenses_html"><![CDATA[<h2>Moria Firmware Extractor</h2><p>Aplicación avanzada para inspección forense de imágenes de firmware, extracción profunda de contenedores, descompresión de sistemas de archivos y análisis de entropía mediante <b>moria</b> nativo y <b>libarchive</b>.</p><p><b>Flujo de Trabajo (Pipeline):</b><br/><code>moria -e firmware.bin &rarr; mithril firmware.bin.extracted/</code></p><hr/><b>Autor de la aplicación Android:</b><br/>Danielk10<br/><br/><b>Herramienta CLI original:</b><br/><b>moria</b> desarrollada por <b>Matt Brown (nmatt0)</b> &mdash; Licencia MIT<br/><a href="https://github.com/nmatt0/moria">https://github.com/nmatt0/moria</a><br/><br/><b>Licencia del proyecto Android:</b> Apache License 2.0<br/><b>Repositorio GitHub:</b> <a href="https://github.com/Danielk10/android-moria-firmware-extractor">Danielk10/android-moria-firmware-extractor</a><br/><hr/><h3>Licencias de Código Abierto</h3><p>Este software integra los siguientes componentes y bibliotecas de código abierto:</p><ul><li><b>Moria CLI</b> &mdash; Licencia MIT (<a href="https://github.com/nmatt0/moria">nmatt0/moria</a>)</li><li><b>libarchive</b> &mdash; Licencia BSD 2-Cláusulas (<a href="https://github.com/libarchive/libarchive">libarchive.org</a>)</li><li><b>bsdunzip</b> &mdash; Licencia BSD 2-Cláusulas</li><li><b>ICU (Unicode Components)</b> &mdash; Licencia Unicode / ICU (<a href="https://icu.unicode.org">icu.unicode.org</a>)</li><li><b>OpenSSL / libcrypto</b> &mdash; Licencia Apache 2.0 (<a href="https://www.openssl.org">openssl.org</a>)</li><li><b>Zstandard (libzstd)</b> &mdash; Licencia BSD 3-Cláusulas (<a href="https://facebook.github.io/zstd/">facebook/zstd</a>)</li><li><b>LZ4 (liblz4)</b> &mdash; Licencia BSD 2-Cláusulas (<a href="https://lz4.org">lz4.org</a>)</li><li><b>XZ / liblzma</b> &mdash; Dominio Público / LGPL 2.1 (<a href="https://tukaani.org/xz/">tukaani.org/xz</a>)</li><li><b>zlib</b> &mdash; Licencia zlib (<a href="https://zlib.net">zlib.net</a>)</li><li><b>libxml2</b> &mdash; Licencia MIT (<a href="https://gitlab.gnome.org/GNOME/libxml2">xmlsoft.org</a>)</li><li><b>libiconv y libcharset</b> &mdash; Licencia LGPL 2.1</li><li><b>libacl</b> &mdash; Licencia LGPL 2.1</li></ul>]]></string>
 
     <!-- Terminal & Log Format Strings -->
     <string name="terminal_welcome_banner">--- Moria Firmware Extractor Terminal ---\nEscriba \'help\' para ver los comandos disponibles.\n\n</string>
@@ -67,4 +67,72 @@
     <string name="log_dir_tag">[DIR] %1$s</string>
     <string name="log_process_aborted">\n[PROCESO ABORTADO POR EL USUARIO]\n</string>
     <string name="log_execution_error">\n[ERROR DE EJECUCIÓN]: %1$s\n</string>
+
+    <!-- Terminal Sandbox Commands Output -->
+    <string name="terminal_cd_workdir">Directorio de trabajo: %1$s\n</string>
+    <string name="terminal_cd_not_dir">cd: no existe el directorio: %1$s\n</string>
+    <string name="terminal_ls_cannot_access">ls: no se puede acceder a \'%1$s\': No existe el directorio\n</string>
+    <string name="terminal_ls_empty">(directorio vacio)\n</string>
+    <string name="terminal_cat_usage">Uso: cat &lt;archivo&gt;\n</string>
+    <string name="terminal_cat_not_found">cat: %1$s: Archivo no encontrado\n</string>
+    <string name="terminal_cat_protected">cat: %1$s: Archivo protegido del sistema\n</string>
+    <string name="terminal_cat_too_large">cat: El archivo es demasiado grande para mostrar (&gt; 2 MB)\n</string>
+    <string name="terminal_cat_error">cat: Error leyendo archivo: %1$s\n</string>
+    <string name="terminal_touch_usage">Uso: touch &lt;archivo&gt;\n</string>
+    <string name="terminal_touch_created">Creado: %1$s\n</string>
+    <string name="terminal_touch_error">touch: error: %1$s\n</string>
+    <string name="terminal_rm_usage">Uso: rm [-r|-rf] &lt;archivo o directorio&gt;\n</string>
+    <string name="terminal_rm_not_found">rm: no se puede borrar \'%1$s\': No existe el archivo o carpeta\n</string>
+    <string name="terminal_rm_protected">rm: no se puede borrar \'%1$s\': Archivo o directorio protegido del sistema\n</string>
+    <string name="terminal_rm_is_dir">rm: \'%1$s\' es un directorio (use \'rm -r\' o \'rm -rf\')\n</string>
+    <string name="terminal_rm_deleted">Eliminado: %1$s\n</string>
+    <string name="terminal_rm_failed">rm: no se pudo eliminar %1$s\n</string>
+    <string name="terminal_mkdir_usage">Uso: mkdir [-p] &lt;directorio&gt;\n</string>
+    <string name="terminal_mkdir_exists">mkdir: no se puede crear el directorio \'%1$s\': Ya existe\n</string>
+    <string name="terminal_mkdir_created">Directorio creado: %1$s\n</string>
+    <string name="terminal_mkdir_failed">mkdir: no se pudo crear %1$s\n</string>
+    <string name="terminal_cp_usage">Uso: cp [-r] &lt;origen&gt; &lt;destino&gt;\n</string>
+    <string name="terminal_cp_not_found">cp: origen no existe: %1$s\n</string>
+    <string name="terminal_cp_omitting_dir">cp: omitiendo directorio \'%1$s\' (use \'cp -r\')\n</string>
+    <string name="terminal_cp_copied">Copiado: %1$s -&gt; %2$s\n</string>
+    <string name="terminal_cp_error">cp: error al copiar %1$s\n</string>
+    <string name="terminal_unrecognized_cmd">Comando no reconocido: %1$s\nEscriba \'help\' o \'?\' para ver los comandos disponibles.\n</string>
+    <string name="terminal_sandbox_help"><![CDATA[======================================================
+  Terminal Sandbox - Comandos del Entorno
+======================================================
+
+COMANDOS INTEGRADOS DEL SANDBOX:
+  ls [-a] [dir]           Listar archivos y directorios
+  pwd                     Mostrar ruta del directorio actual
+  cd <dir>                Cambiar directorio ('cd ~' para inicio)
+  cat <archivo>           Ver contenido de un archivo de texto
+  touch <archivo>         Crear archivo vacío o actualizar fecha
+  mkdir [-p] <dir>        Crear un nuevo directorio
+  rm [-r|-rf] <objetivo>  Eliminar archivo o directorio
+  cp [-r] <origen> <dst>  Copiar archivo o directorio
+  echo <texto>            Imprimir texto en la terminal
+  clear / cls             Limpiar el historial de la pantalla
+  help / ?                Mostrar esta ayuda del sandbox
+
+======================================================
+  EJECUCIÓN DEL BINARIO NATIVO REAL (MORIA)
+======================================================
+Desde la caja de comandos inferior puede ejecutar directamente
+el binario nativo real con cualquier comando u opción:
+
+  moria [opciones] <archivo|directorio>
+
+EJEMPLOS:
+  moria firmware.bin          Identificar firmware
+  moria -e firmware.bin       Extraer sistemas de archivos
+  moria -c firmware.bin       Cortar (carve) flujos de bytes
+  moria -A firmware.bin       Inspección profunda completa
+  moria -E firmware.bin       Análisis de entropía
+  moria --list firmware.bin   Listar contenidos sin extraer
+  moria -e file.bin | grep sq Tuberías y filtros shell
+
+Para ver la ayuda nativa completa del binario Moria, ejecute:
+  moria --help
+======================================================
+]]></string>
 </resources>
