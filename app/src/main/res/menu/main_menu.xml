@@ -13,6 +13,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_import_folder"
+        android:title="@string/menu_import_folder"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_export_downloads"
         android:title="@string/menu_export_downloads"
         app:showAsAction="never" />

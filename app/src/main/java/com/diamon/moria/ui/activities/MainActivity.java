@@ -112,13 +112,36 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                 }
             });
 
-    // Selector de archivo firmware objetivo / importación
+    // Selector de archivo(s) firmware objetivo / importación
     private final ActivityResultLauncher<Intent> fileImportLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Uri uri = result.getData().getData();
-                    if (uri != null) {
-                        importFileToWorkspace(uri);
+                    Intent data = result.getData();
+                    if (data.getClipData() != null) {
+                        int count = data.getClipData().getItemCount();
+                        List<Uri> uris = new ArrayList<>();
+                        for (int i = 0; i < count; i++) {
+                            Uri uri = data.getClipData().getItemAt(i).getUri();
+                            if (uri != null) uris.add(uri);
+                        }
+                        importMultipleFilesToWorkspace(uris);
+                    } else if (data.getData() != null) {
+                        importFileToWorkspace(data.getData());
+                    }
+                }
+            });
+
+    // Selector de carpeta completa para importar al espacio de trabajo
+    private final ActivityResultLauncher<Intent> folderImportLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Uri treeUri = result.getData().getData();
+                    if (treeUri != null) {
+                        try {
+                            getContentResolver().takePersistableUriPermission(treeUri,
+                                    Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        } catch (Exception ignored) {}
+                        importFolderToWorkspace(treeUri);
                     }
                 }
             });
@@ -204,7 +227,14 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
 
     private void updateTargetDisplay() {
         if (currentTargetFile != null && currentTargetFile.exists() && !FileManager.shouldIgnore(currentTargetFile)) {
-            String sizeStr = currentTargetFile.length() < 1024 ? currentTargetFile.length() + " B" : (currentTargetFile.length() / 1024) + " KB";
+            String sizeStr;
+            if (currentTargetFile.isDirectory()) {
+                File[] sub = currentTargetFile.listFiles();
+                int count = sub != null ? sub.length : 0;
+                sizeStr = count + " items";
+            } else {
+                sizeStr = currentTargetFile.length() < 1024 ? currentTargetFile.length() + " B" : (currentTargetFile.length() / 1024) + " KB";
+            }
             tvTarget.setText(getString(R.string.target_selected, currentTargetFile.getName(), sizeStr));
         } else {
             currentTargetFile = null;
@@ -323,13 +353,14 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                 return a.getName().compareToIgnoreCase(b.getName());
             });
             for (File f : files) {
-                if (FileManager.shouldIgnore(f) || f.isDirectory()) continue;
-                displayNames.add(f.getName());
+                if (FileManager.shouldIgnore(f)) continue;
+                displayNames.add(f.isDirectory() ? "[DIR] " + f.getName() : f.getName());
                 targetFiles.add(f);
             }
         }
 
         displayNames.add(getString(R.string.dialog_import_new_file));
+        displayNames.add(getString(R.string.dialog_import_new_folder));
 
         String[] items = displayNames.toArray(new String[0]);
         new AlertDialog.Builder(this)
@@ -337,6 +368,8 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                 .setItems(items, (dialog, which) -> {
                     if (which == targetFiles.size()) {
                         openFilePicker();
+                    } else if (which == targetFiles.size() + 1) {
+                        openFolderPicker();
                     } else {
                         currentTargetFile = targetFiles.get(which);
                         updateTargetDisplay();
@@ -350,12 +383,19 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType("*/*");
         fileImportLauncher.launch(intent);
     }
 
+    private void openFolderPicker() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        folderImportLauncher.launch(intent);
+    }
+
     private void runMoriaAction(String actionFlag) {
-        if (currentTargetFile == null || !currentTargetFile.exists() || FileManager.shouldIgnore(currentTargetFile) || currentTargetFile.isDirectory()) {
+        if (currentTargetFile == null || !currentTargetFile.exists() || FileManager.shouldIgnore(currentTargetFile)) {
             currentTargetFile = null;
             updateTargetDisplay();
             Toast.makeText(this, R.string.select_target_prompt, Toast.LENGTH_SHORT).show();
@@ -414,6 +454,87 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
         }
     }
 
+    private void importMultipleFilesToWorkspace(List<Uri> uris) {
+        if (uris == null || uris.isEmpty()) return;
+        tvStatus.setVisibility(View.VISIBLE);
+        tvStatus.setText(getString(R.string.str_folder_importing, "...", 0));
+
+        new Thread(() -> {
+            int successCount = 0;
+            File lastDest = null;
+            File workDir = terminalExecutor.getCurrentWorkDir();
+
+            for (Uri uri : uris) {
+                String name = FileManager.getFileName(this, uri);
+                File destFile = new File(workDir, name);
+                if (FileManager.copyUriToFile(this, uri, destFile)) {
+                    successCount++;
+                    lastDest = destFile;
+                }
+            }
+
+            final int count = successCount;
+            final File selected = lastDest;
+            runOnUiThread(() -> {
+                tvStatus.setVisibility(View.GONE);
+                if (count > 0 && selected != null) {
+                    currentTargetFile = selected;
+                    updateTargetDisplay();
+                    String msg = getString(R.string.str_files_imported, count);
+                    appendLog(getString(R.string.log_imported_prefix, msg));
+                    Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                } else {
+                    String err = getString(R.string.str_file_import_error, "multi-files");
+                    appendLog(getString(R.string.log_error_prefix, err));
+                    Toast.makeText(MainActivity.this, err, Toast.LENGTH_LONG).show();
+                }
+            });
+        }).start();
+    }
+
+    private void importFolderToWorkspace(Uri treeUri) {
+        tvStatus.setVisibility(View.VISIBLE);
+        tvStatus.setText(getString(R.string.str_folder_importing, "...", 0));
+        appendLog(getString(R.string.log_init_prefix, getString(R.string.str_folder_importing, "directorio", 0)));
+
+        new Thread(() -> {
+            File workDir = terminalExecutor.getCurrentWorkDir();
+            final long[] lastUpdateTime = new long[]{System.currentTimeMillis()};
+
+            FileManager.FolderImportResult result = FileManager.importDocumentTree(
+                    this, treeUri, workDir, (filesCopied, currentFile) -> {
+                        long now = System.currentTimeMillis();
+                        if (now - lastUpdateTime[0] > 400 || filesCopied % 20 == 0) {
+                            lastUpdateTime[0] = now;
+                            runOnUiThread(() -> {
+                                tvStatus.setText(getString(R.string.str_folder_importing, currentFile, filesCopied));
+                            });
+                        }
+                    });
+
+            runOnUiThread(() -> {
+                tvStatus.setVisibility(View.GONE);
+                if (result.success && result.folder != null) {
+                    currentTargetFile = result.folder;
+                    updateTargetDisplay();
+                    String sizeStr = FileManager.formatSize(result.totalBytes);
+                    String msg = getString(R.string.str_folder_imported, result.folder.getName(), result.fileCount, sizeStr);
+                    appendLog(getString(R.string.log_imported_prefix, msg));
+                    Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                } else {
+                    String folderName = "directorio";
+                    try {
+                        androidx.documentfile.provider.DocumentFile doc = androidx.documentfile.provider.DocumentFile.fromTreeUri(MainActivity.this, treeUri);
+                        if (doc != null && doc.getName() != null) folderName = doc.getName();
+                    } catch (Exception ignored) {}
+                    String err = getString(R.string.str_folder_import_error, folderName);
+                    appendLog(getString(R.string.log_error_prefix, err));
+                    Toast.makeText(MainActivity.this, err, Toast.LENGTH_LONG).show();
+                }
+            });
+        }).start();
+    }
+
     private void exportAllFilesToDownloads() {
         File workDir = terminalExecutor.getCurrentWorkDir();
         List<String> exported = FileManager.exportAllToDownloads(this, workDir, FileManager.DEFAULT_DOWNLOADS_FOLDER);
@@ -468,6 +589,9 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
             return true;
         } else if (id == R.id.action_import_file) {
             openFilePicker();
+            return true;
+        } else if (id == R.id.action_import_folder) {
+            openFolderPicker();
             return true;
         } else if (id == R.id.action_export_downloads) {
             exportAllFilesToDownloads();

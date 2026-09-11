@@ -3,6 +3,7 @@
     <string name="app_name">Moria Firmware Extractor</string>
     <string name="menu_set_working_dir">Seleccionar Carpeta de Trabajo</string>
     <string name="menu_import_file">Importar Archivo al Espacio de Trabajo</string>
+    <string name="menu_import_folder">Importar Carpeta al Espacio de Trabajo</string>
     <string name="menu_export_downloads">Exportar Archivos a Descargas</string>
     <string name="menu_policy">Políticas de Privacidad</string>
     <string name="menu_about_licenses">Acerca de y Licencias</string>
@@ -15,6 +16,10 @@
     <string name="str_export_none">No se encontraron archivos para exportar en el espacio actual.</string>
     <string name="str_file_imported">Archivo importado con éxito: %1$s (%2$s)</string>
     <string name="str_file_import_error">Error al importar archivo: %1$s</string>
+    <string name="str_folder_imported">Carpeta importada con éxito: %1$s (%2$d archivos, %3$s)</string>
+    <string name="str_folder_import_error">Error al importar carpeta: %1$s</string>
+    <string name="str_folder_importing">Importando %1$s: %2$d archivos copiados...</string>
+    <string name="str_files_imported">%1$d archivo(s) importados con éxito.</string>
     <string name="str_status_running">Ejecutando: %1$s</string>
     <string name="str_preparando_depe">Preparando dependencias y runtime nativo...</string>
     <string name="str_extracting_libs">Extrayendo librerías y componentes del runtime...</string>
@@ -46,9 +51,10 @@
     <string name="cb_broad">Amplio (--broad)</string>
     <string name="target_none">Objetivo: Ningún archivo seleccionado (Toca para seleccionar)</string>
     <string name="target_selected">Objetivo: %1$s (%2$s)</string>
-    <string name="select_target_prompt">Seleccione primero un archivo de firmware.</string>
+    <string name="select_target_prompt">Seleccione primero un archivo o directorio de firmware.</string>
     <string name="dialog_select_target_title">Seleccionar Firmware Objetivo</string>
     <string name="dialog_import_new_file">+ Importar nuevo archivo desde almacenamiento...</string>
+    <string name="dialog_import_new_folder">+ Importar carpeta completa desde almacenamiento...</string>
 
     <!-- About & Licenses Unified Dialog -->
     <string name="about_licenses_dialog_title">Acerca de y Licencias</string>

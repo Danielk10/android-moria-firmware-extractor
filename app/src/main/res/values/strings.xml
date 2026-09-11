@@ -3,6 +3,7 @@
     <string name="app_name">Moria Firmware Extractor</string>
     <string name="menu_set_working_dir">Select Working Directory</string>
     <string name="menu_import_file">Import File to Workspace</string>
+    <string name="menu_import_folder">Import Folder to Workspace</string>
     <string name="menu_export_downloads">Export Files to Downloads</string>
     <string name="menu_policy">Privacy Policy</string>
     <string name="menu_about_licenses">About &amp; Licenses</string>
@@ -15,6 +16,10 @@
     <string name="str_export_none">No files found to export in current workspace.</string>
     <string name="str_file_imported">File imported successfully: %1$s (%2$s)</string>
     <string name="str_file_import_error">Error importing file: %1$s</string>
+    <string name="str_folder_imported">Folder imported successfully: %1$s (%2$d files, %3$s)</string>
+    <string name="str_folder_import_error">Error importing folder: %1$s</string>
+    <string name="str_folder_importing">Importing %1$s: %2$d files copied...</string>
+    <string name="str_files_imported">%1$d file(s) imported successfully.</string>
     <string name="str_status_running">Executing: %1$s</string>
     <string name="str_preparando_depe">Preparing native dependencies and runtime...</string>
     <string name="str_extracting_libs">Extracting libraries and runtime components...</string>
@@ -46,9 +51,10 @@
     <string name="cb_broad">Broad (--broad)</string>
     <string name="target_none">Target: No file selected (Tap to select)</string>
     <string name="target_selected">Target: %1$s (%2$s)</string>
-    <string name="select_target_prompt">Please select a firmware file first.</string>
+    <string name="select_target_prompt">Please select a firmware file or directory first.</string>
     <string name="dialog_select_target_title">Select Target Firmware</string>
     <string name="dialog_import_new_file">+ Import new file from storage...</string>
+    <string name="dialog_import_new_folder">+ Import folder tree from storage...</string>
 
     <!-- About & Licenses Unified Dialog -->
     <string name="about_licenses_dialog_title">About &amp; Licenses</string>

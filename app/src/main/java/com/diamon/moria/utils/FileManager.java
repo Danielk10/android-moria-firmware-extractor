@@ -10,6 +10,8 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
 
+import androidx.documentfile.provider.DocumentFile;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -23,6 +25,24 @@ import java.util.Locale;
 public class FileManager {
     private static final String TAG = "FileManager";
     public static final String DEFAULT_DOWNLOADS_FOLDER = "Moria_Firmware";
+
+    public interface FolderImportListener {
+        void onProgress(int filesCopied, String currentFileName);
+    }
+
+    public static class FolderImportResult {
+        public final boolean success;
+        public final File folder;
+        public final int fileCount;
+        public final long totalBytes;
+
+        public FolderImportResult(boolean success, File folder, int fileCount, long totalBytes) {
+            this.success = success;
+            this.folder = folder;
+            this.fileCount = fileCount;
+            this.totalBytes = totalBytes;
+        }
+    }
 
     public static String getFileName(Context context, Uri uri) {
         String result = null;
@@ -108,7 +128,7 @@ public class FileManager {
             boolean success = true;
             if (children != null) {
                 for (File child : children) {
-                    if (shouldIgnore(child)) continue;
+                    if (child == null || child.getName().startsWith(".")) continue;
                     String nextSubFolder = (subFolder == null || subFolder.isEmpty())
                             ? sourceFile.getName()
                             : subFolder + "/" + sourceFile.getName();
@@ -218,5 +238,115 @@ public class FileManager {
             }
         }
         return exportedFiles;
+    }
+
+    public static long getFolderSize(File dir) {
+        if (dir == null || !dir.exists()) return 0;
+        if (dir.isFile()) return dir.length();
+        long total = 0;
+        File[] files = dir.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.getName().startsWith(".")) continue;
+                if (f.isDirectory()) {
+                    total += getFolderSize(f);
+                } else {
+                    total += f.length();
+                }
+            }
+        }
+        return total;
+    }
+
+    public static String formatSize(long bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) return String.format(Locale.US, "%.1f KB", bytes / 1024.0);
+        return String.format(Locale.US, "%.1f MB", bytes / (1024.0 * 1024.0));
+    }
+
+    public static FolderImportResult importDocumentTree(Context context, Uri treeUri, File workspaceDir, FolderImportListener listener) {
+        if (context == null || treeUri == null || workspaceDir == null) {
+            return new FolderImportResult(false, null, 0, 0);
+        }
+
+        DocumentFile rootDoc = DocumentFile.fromTreeUri(context, treeUri);
+        if (rootDoc == null || !rootDoc.exists()) {
+            return new FolderImportResult(false, null, 0, 0);
+        }
+
+        String folderName = rootDoc.getName();
+        if (folderName == null || folderName.trim().isEmpty()) {
+            folderName = "imported_folder";
+        }
+
+        File targetDir = new File(workspaceDir, folderName);
+        if (!targetDir.exists() && !targetDir.mkdirs()) {
+            return new FolderImportResult(false, null, 0, 0);
+        }
+
+        int[] counter = new int[]{0};
+        boolean ok = copyDocumentTree(context, rootDoc, targetDir, listener, counter);
+        long size = ok ? getFolderSize(targetDir) : 0;
+        return new FolderImportResult(ok, targetDir, counter[0], size);
+    }
+
+    public static boolean copyDocumentTree(Context context, DocumentFile sourceDoc, File destDir, FolderImportListener listener, int[] counter) {
+        if (sourceDoc == null || !sourceDoc.exists()) return false;
+        if (!destDir.exists() && !destDir.mkdirs()) return false;
+
+        DocumentFile[] children = sourceDoc.listFiles();
+        if (children == null) return true;
+
+        for (DocumentFile child : children) {
+            if (child == null || !child.exists()) continue;
+            String childName = child.getName();
+            if (childName == null || childName.trim().isEmpty() || childName.equals(".") || childName.equals("..")) {
+                continue;
+            }
+
+            if (child.isDirectory()) {
+                File subDir = new File(destDir, childName);
+                if (!subDir.exists() && !subDir.mkdirs()) {
+                    Log.e(TAG, "No se pudo crear subdirectorio local: " + subDir.getAbsolutePath());
+                    return false;
+                }
+                if (!copyDocumentTree(context, child, subDir, listener, counter)) {
+                    return false;
+                }
+            } else if (child.isFile()) {
+                File targetFile = new File(destDir, childName);
+                if (!copyDocumentToFile(context, child, targetFile)) {
+                    Log.e(TAG, "Fallo al copiar archivo: " + childName);
+                    return false;
+                }
+                counter[0]++;
+                if (listener != null) {
+                    listener.onProgress(counter[0], childName);
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean copyDocumentToFile(Context context, DocumentFile sourceDoc, File destFile) {
+        File parent = destFile.getParentFile();
+        if (parent != null && !parent.exists() && !parent.mkdirs()) {
+            return false;
+        }
+
+        try (InputStream in = context.getContentResolver().openInputStream(sourceDoc.getUri());
+             OutputStream out = new FileOutputStream(destFile)) {
+            if (in == null) return false;
+            byte[] buffer = new byte[16384];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            out.flush();
+            return true;
+        } catch (IOException e) {
+            Log.e(TAG, "Error copiando DocumentFile a destino " + destFile.getAbsolutePath(), e);
+            return false;
+        }
     }
 }
