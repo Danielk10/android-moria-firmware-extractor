@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     private EditText etCommand;
 
     private Button btnSelectTarget;
-    private Button btnExportDownloads;
 
     private Button btnIdentify;
     private Button btnExtract;
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     private ImageButton btnDelete;
     private ImageButton btnPaste;
     private ImageButton btnCopy;
-    private Button btnClear;
+    private ImageButton btnClear;
     private ImageButton btnAbort;
     private LogScrollView scrollLog;
 
@@ -142,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
         etCommand = findViewById(R.id.etCommand);
 
         btnSelectTarget = findViewById(R.id.btnSelectTarget);
-        btnExportDownloads = findViewById(R.id.btnExportDownloads);
 
         btnIdentify = findViewById(R.id.btnIdentify);
         btnExtract = findViewById(R.id.btnExtract);
@@ -210,11 +208,8 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
 
     private void setupListeners() {
         // Selección de archivo firmware
-        btnSelectTarget.setOnClickListener(v -> openFilePicker());
-        tvTarget.setOnClickListener(v -> openFilePicker());
-
-        // Exportar archivos a Descargas
-        btnExportDownloads.setOnClickListener(v -> exportAllFilesToDownloads());
+        btnSelectTarget.setOnClickListener(v -> showTargetPickerDialog());
+        tvTarget.setOnClickListener(v -> showTargetPickerDialog());
 
         // Acciones nativas de Moria
         btnIdentify.setOnClickListener(v -> runMoriaAction(""));
@@ -316,6 +311,40 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
         }
     }
 
+    private void showTargetPickerDialog() {
+        File workDir = terminalExecutor != null ? terminalExecutor.getCurrentWorkDir() : null;
+        File[] files = (workDir != null && workDir.exists()) ? workDir.listFiles() : null;
+
+        List<String> displayNames = new ArrayList<>();
+        List<File> targetFiles = new ArrayList<>();
+
+        if (files != null) {
+            for (File f : files) {
+                if (f.getName().startsWith(".")) continue;
+                String label = f.isDirectory() ? "[DIR] " + f.getName() : f.getName();
+                displayNames.add(label);
+                targetFiles.add(f);
+            }
+        }
+
+        displayNames.add(getString(R.string.dialog_import_new_file));
+
+        String[] items = displayNames.toArray(new String[0]);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.dialog_select_target_title)
+                .setItems(items, (dialog, which) -> {
+                    if (which == targetFiles.size()) {
+                        openFilePicker();
+                    } else {
+                        currentTargetFile = targetFiles.get(which);
+                        updateTargetDisplay();
+                        appendLog("[OBJETIVO] Seleccionado: " + currentTargetFile.getName() + "\n");
+                    }
+                })
+                .setNegativeButton(R.string.str_close, null)
+                .show();
+    }
+
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -326,7 +355,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     private void runMoriaAction(String actionFlag) {
         if (currentTargetFile == null || !currentTargetFile.exists()) {
             Toast.makeText(this, R.string.select_target_prompt, Toast.LENGTH_SHORT).show();
-            openFilePicker();
+            showTargetPickerDialog();
             return;
         }
 
@@ -439,66 +468,35 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
         } else if (id == R.id.action_export_downloads) {
             exportAllFilesToDownloads();
             return true;
-        } else if (id == R.id.action_copy_logs) {
-            copyLogsToClipboard();
-            return true;
-        } else if (id == R.id.action_clear_terminal) {
-            onClearRequested();
-            return true;
-        } else if (id == R.id.action_licenses) {
-            showLicensesDialog();
-            return true;
         } else if (id == R.id.action_policy) {
             startActivity(new Intent(this, PolicyActivity.class));
             return true;
-        } else if (id == R.id.action_about) {
-            showAboutDialog();
+        } else if (id == R.id.action_about_licenses) {
+            showAboutAndLicensesDialog();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void showLicensesDialog() {
-        TextView licensesText = new TextView(this);
+    private void showAboutAndLicensesDialog() {
+        TextView dialogText = new TextView(this);
         int padding = (int) (18 * getResources().getDisplayMetrics().density);
-        licensesText.setPadding(padding, padding, padding, padding / 2);
-        licensesText.setMovementMethod(LinkMovementMethod.getInstance());
-        String licensesHtml = getString(R.string.licenses_dialog_message);
+        dialogText.setPadding(padding, padding, padding, padding / 2);
+        dialogText.setMovementMethod(LinkMovementMethod.getInstance());
+        String html = getString(R.string.str_about_licenses_html);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            licensesText.setText(Html.fromHtml(licensesHtml, Html.FROM_HTML_MODE_COMPACT));
+            dialogText.setText(Html.fromHtml(html, Html.FROM_HTML_MODE_COMPACT));
         } else {
             @SuppressWarnings("deprecation")
-            CharSequence text = Html.fromHtml(licensesHtml);
-            licensesText.setText(text);
+            CharSequence text = Html.fromHtml(html);
+            dialogText.setText(text);
         }
 
         new AlertDialog.Builder(this)
-                .setTitle(R.string.licenses_dialog_title)
-                .setView(licensesText)
-                .setPositiveButton(R.string.str_close, null)
-                .show();
-    }
-
-    private void showAboutDialog() {
-        TextView aboutText = new TextView(this);
-        int padding = (int) (20 * getResources().getDisplayMetrics().density);
-        aboutText.setPadding(padding, padding, padding, padding / 2);
-        aboutText.setMovementMethod(LinkMovementMethod.getInstance());
-        String aboutHtml = getString(R.string.str_about_html);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            aboutText.setText(Html.fromHtml(aboutHtml, Html.FROM_HTML_MODE_COMPACT));
-        } else {
-            @SuppressWarnings("deprecation")
-            CharSequence text = Html.fromHtml(aboutHtml);
-            aboutText.setText(text);
-        }
-
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.str_acerca_de)
-                .setView(aboutText)
+                .setTitle(R.string.about_licenses_dialog_title)
+                .setView(dialogText)
                 .setPositiveButton(R.string.str_close, null)
                 .show();
     }
@@ -512,6 +510,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     @Override
     public void onCommandStarted(String command) {
         btnAbort.setVisibility(View.VISIBLE);
+        tvStatus.setVisibility(View.VISIBLE);
         tvStatus.setText(getString(R.string.str_status_running, command));
         appendLog("$ " + command + "\n");
     }
@@ -519,7 +518,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     @Override
     public void onCommandFinished(int exitCode) {
         btnAbort.setVisibility(View.GONE);
-        tvStatus.setText(R.string.str_status_ready);
+        tvStatus.setVisibility(View.GONE);
         updateTargetDisplay();
     }
 

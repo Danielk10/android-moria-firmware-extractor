@@ -45,47 +45,21 @@
         android:padding="6dp"
         android:visibility="gone">
 
-        <!-- Fila 1: Selección de Archivo Objetivo y Exportar -->
-        <LinearLayout
+        <!-- Selección de Archivo Firmware Objetivo -->
+        <Button
+            android:id="@+id/btnSelectTarget"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="3dp">
-
-            <Button
-                android:id="@+id/btnSelectTarget"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1.2"
-                android:minHeight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:text="@string/btn_select_target"
-                android:textColor="@color/btn_text_color"
-                android:textSize="12sp"
-                app:backgroundTint="@color/btn_tint_blue" />
-
-            <Space
-                android:layout_width="6dp"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnExportDownloads"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:minHeight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:text="@string/menu_export_downloads"
-                android:textColor="@color/btn_text_color"
-                android:textSize="12sp"
-                app:backgroundTint="@color/btn_tint_grey" />
-        </LinearLayout>
+            android:layout_height="36dp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="@string/btn_select_target"
+            android:textColor="@color/btn_text_color"
+            android:textSize="12sp"
+            app:backgroundTint="@color/btn_tint_blue"
+            android:layout_marginBottom="3dp" />
 
         <!-- Indicador de Archivo Objetivo Seleccionado -->
         <TextView
@@ -427,20 +401,18 @@
                     android:layout_marginStart="1dp"
                     android:layout_marginEnd="2dp" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/btnClear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="28dp"
-                    android:minHeight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/str_limpiar"
-                    android:textColor="@color/btn_text_color"
-                    android:textSize="11sp"
-                    app:backgroundTint="@color/btn_tint_grey"
-                    android:layout_marginStart="2dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_clear"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_clear"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
                     android:layout_marginEnd="2dp" />
 
                 <ImageButton
@@ -462,11 +434,11 @@
                     android:id="@+id/tvStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/str_status_ready"
                     android:textColor="#4CAF50"
                     android:textStyle="bold"
                     android:textSize="11sp"
                     android:singleLine="true"
+                    android:visibility="gone"
                     android:layout_marginStart="6dp"
                     android:layout_marginEnd="4dp" />
 

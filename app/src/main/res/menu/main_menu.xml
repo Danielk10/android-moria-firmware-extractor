@@ -18,27 +18,12 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_copy_logs"
-        android:title="@string/menu_copy_logs"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_clear_terminal"
-        android:title="@string/menu_clear_terminal"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_policy"
         android:title="@string/str_polticas_de_pri"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_licenses"
-        android:title="@string/menu_licenses"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_about"
-        android:title="@string/str_acerca_de"
+        android:id="@+id/action_about_licenses"
+        android:title="@string/menu_about_licenses"
         app:showAsAction="never" />
 </menu>
