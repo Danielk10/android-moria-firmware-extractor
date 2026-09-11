@@ -203,10 +203,11 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     }
 
     private void updateTargetDisplay() {
-        if (currentTargetFile != null && currentTargetFile.exists()) {
+        if (currentTargetFile != null && currentTargetFile.exists() && !FileManager.shouldIgnore(currentTargetFile)) {
             String sizeStr = currentTargetFile.length() < 1024 ? currentTargetFile.length() + " B" : (currentTargetFile.length() / 1024) + " KB";
             tvTarget.setText(getString(R.string.target_selected, currentTargetFile.getName(), sizeStr));
         } else {
+            currentTargetFile = null;
             tvTarget.setText(R.string.target_none);
         }
     }
@@ -322,9 +323,8 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                 return a.getName().compareToIgnoreCase(b.getName());
             });
             for (File f : files) {
-                if (FileManager.shouldIgnore(f)) continue;
-                String label = f.isDirectory() ? getString(R.string.log_dir_tag, f.getName()) : f.getName();
-                displayNames.add(label);
+                if (FileManager.shouldIgnore(f) || f.isDirectory()) continue;
+                displayNames.add(f.getName());
                 targetFiles.add(f);
             }
         }
@@ -355,7 +355,9 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     }
 
     private void runMoriaAction(String actionFlag) {
-        if (currentTargetFile == null || !currentTargetFile.exists()) {
+        if (currentTargetFile == null || !currentTargetFile.exists() || FileManager.shouldIgnore(currentTargetFile) || currentTargetFile.isDirectory()) {
+            currentTargetFile = null;
+            updateTargetDisplay();
             Toast.makeText(this, R.string.select_target_prompt, Toast.LENGTH_SHORT).show();
             showTargetPickerDialog();
             return;

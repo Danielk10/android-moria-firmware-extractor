@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FileManager {
     private static final String TAG = "FileManager";
@@ -76,20 +77,25 @@ public class FileManager {
     public static boolean shouldIgnore(File f) {
         if (f == null) return true;
         String name = f.getName();
-        if (name.startsWith(".")) return true;
-        if (name.equalsIgnoreCase("profileInstalled") || 
-            name.toLowerCase().startsWith("profileinstaller")) {
+        if (name == null || name.trim().isEmpty() || name.startsWith(".")) return true;
+        String lower = name.toLowerCase(Locale.US);
+        if (lower.contains("profileinstall") || lower.contains("profile_install") || lower.contains("profile-install")) {
             return true;
         }
-        return name.equalsIgnoreCase("usr") || 
-               name.equalsIgnoreCase("bin") || 
-               name.equalsIgnoreCase("lib") || 
-               name.equalsIgnoreCase("cache") || 
-               name.equalsIgnoreCase("code_cache") || 
-               name.equalsIgnoreCase("app_webview") || 
-               name.equalsIgnoreCase("databases") || 
-               name.equalsIgnoreCase("shared_prefs") || 
-               name.equalsIgnoreCase("system");
+        return lower.equals("usr") || 
+               lower.equals("bin") || 
+               lower.equals("lib") || 
+               lower.equals("cache") || 
+               lower.equals("code_cache") || 
+               lower.equals("app_webview") || 
+               lower.equals("databases") || 
+               lower.equals("shared_prefs") || 
+               lower.equals("system") || 
+               lower.equals("include") || 
+               lower.equals("runtimes") || 
+               lower.equals("dexopt") || 
+               lower.equals("no_backup") || 
+               lower.equals("tmp");
     }
 
     public static boolean exportFileToDownloads(Context context, File sourceFile, String subFolder) {

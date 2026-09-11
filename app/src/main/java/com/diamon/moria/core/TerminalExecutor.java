@@ -25,6 +25,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.diamon.moria.R;
+import com.diamon.moria.utils.FileManager;
 
 public class TerminalExecutor {
     private static final String TAG = "TerminalExecutor";
@@ -192,9 +193,16 @@ public class TerminalExecutor {
 
     private void executeLs(String[] tokens) {
         File dir = currentWorkDir;
-        if (tokens.length > 1) {
-            String p = tokens[1];
-            dir = p.startsWith("/") ? new File(p) : new File(currentWorkDir, p);
+        boolean showHidden = false;
+        for (int i = 1; i < tokens.length; i++) {
+            String token = tokens[i];
+            if (token.startsWith("-")) {
+                if (token.contains("a")) {
+                    showHidden = true;
+                }
+            } else {
+                dir = token.startsWith("/") ? new File(token) : new File(currentWorkDir, token);
+            }
         }
 
         if (!dir.exists() || !dir.isDirectory()) {
@@ -215,7 +223,8 @@ public class TerminalExecutor {
         StringBuilder sb = new StringBuilder();
 
         for (File f : files) {
-            if (f.getName().startsWith(".") && !tokensHasFlag(tokens, "-a")) continue;
+            if (FileManager.shouldIgnore(f)) continue;
+            if (f.getName().startsWith(".") && !showHidden) continue;
             String type = f.isDirectory() ? "d" : "-";
             String r = f.canRead() ? "r" : "-";
             String w = f.canWrite() ? "w" : "-";
@@ -224,7 +233,11 @@ public class TerminalExecutor {
             String date = sdf.format(new Date(f.lastModified()));
             sb.append(String.format(Locale.US, "%s%s%s%s %8s  %s  %s\n", type, r, w, x, size, date, f.getName()));
         }
-        postOutput(sb.toString());
+        if (sb.length() == 0) {
+            postOutput("(directorio vacio)\n");
+        } else {
+            postOutput(sb.toString());
+        }
         postFinished(0);
     }
 
@@ -244,6 +257,11 @@ public class TerminalExecutor {
         File f = resolveFile(tokens[1]);
         if (!f.exists() || !f.isFile()) {
             postOutput("cat: " + tokens[1] + ": Archivo no encontrado\n");
+            postFinished(1);
+            return;
+        }
+        if (FileManager.shouldIgnore(f)) {
+            postOutput("cat: " + tokens[1] + ": Archivo protegido del sistema\n");
             postFinished(1);
             return;
         }
@@ -321,6 +339,12 @@ public class TerminalExecutor {
         File f = resolveFile(targetName);
         if (!f.exists()) {
             postOutput("rm: no se puede borrar '" + targetName + "': No existe el archivo o carpeta\n");
+            postFinished(1);
+            return;
+        }
+
+        if (FileManager.shouldIgnore(f)) {
+            postOutput("rm: no se puede borrar '" + targetName + "': Archivo o directorio protegido del sistema\n");
             postFinished(1);
             return;
         }
