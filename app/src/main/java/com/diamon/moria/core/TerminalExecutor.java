@@ -151,7 +151,7 @@ public class TerminalExecutor {
                 return;
 
             case "pwd":
-                postOutput(currentWorkDir.getAbsolutePath() + "\n");
+                postOutput(formatDisplayPath(currentWorkDir) + "\n");
                 postFinished(0);
                 return;
 
@@ -195,14 +195,18 @@ public class TerminalExecutor {
     private void executeCd(String[] tokens) {
         if (tokens.length < 2 || tokens[1].equals("~")) {
             currentWorkDir = context.getFilesDir();
-            postOutput(context.getString(R.string.terminal_cd_workdir, currentWorkDir.getAbsolutePath()));
+            postOutput(context.getString(R.string.terminal_cd_workdir, formatDisplayPath(currentWorkDir)));
             postFinished(0);
             return;
         }
 
         String target = tokens[1];
         File newDir;
-        if (target.startsWith("/")) {
+        if (target.equals("~")) {
+            newDir = context.getFilesDir();
+        } else if (target.startsWith("~/")) {
+            newDir = new File(context.getFilesDir(), target.substring(2));
+        } else if (target.startsWith("/")) {
             newDir = new File(target);
         } else if (target.equals("..")) {
             newDir = currentWorkDir.getParentFile();
@@ -213,7 +217,7 @@ public class TerminalExecutor {
 
         if (newDir.exists() && newDir.isDirectory()) {
             currentWorkDir = newDir;
-            postOutput(currentWorkDir.getAbsolutePath() + "\n");
+            postOutput(formatDisplayPath(currentWorkDir) + "\n");
             postFinished(0);
         } else {
             postOutput(context.getString(R.string.terminal_cd_not_dir, target));
@@ -231,7 +235,7 @@ public class TerminalExecutor {
                     showHidden = true;
                 }
             } else {
-                dir = token.startsWith("/") ? new File(token) : new File(currentWorkDir, token);
+                dir = resolveFile(token);
             }
         }
 
@@ -577,7 +581,13 @@ public class TerminalExecutor {
             List<String> fullCmd = new ArrayList<>();
             fullCmd.add(executableFile.getAbsolutePath());
             for (int i = 1; i < tokens.length; i++) {
-                fullCmd.add(tokens[i]);
+                String arg = tokens[i];
+                if (arg.equals("~")) {
+                    arg = filesDir.getAbsolutePath();
+                } else if (arg.startsWith("~/")) {
+                    arg = new File(filesDir, arg.substring(2)).getAbsolutePath();
+                }
+                fullCmd.add(arg);
             }
 
             ProcessBuilder pb = new ProcessBuilder(fullCmd);
@@ -720,10 +730,36 @@ public class TerminalExecutor {
     }
 
     private File resolveFile(String path) {
+        if (path == null || path.isEmpty()) {
+            return currentWorkDir;
+        }
+        if (path.equals("~")) {
+            return context.getFilesDir();
+        }
+        if (path.startsWith("~/")) {
+            return new File(context.getFilesDir(), path.substring(2));
+        }
         if (path.startsWith("/")) {
             return new File(path);
         }
         return new File(currentWorkDir, path);
+    }
+
+    public String formatDisplayPath(File file) {
+        if (file == null) return "";
+        return formatDisplayPath(file.getAbsolutePath());
+    }
+
+    public String formatDisplayPath(String path) {
+        if (path == null) return "";
+        String home = context.getFilesDir().getAbsolutePath();
+        if (path.equals(home)) {
+            return "~";
+        }
+        if (path.startsWith(home + "/")) {
+            return "~" + path.substring(home.length());
+        }
+        return path;
     }
 
     private String formatFileSize(long bytes) {
