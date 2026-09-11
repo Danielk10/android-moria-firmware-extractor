@@ -97,42 +97,4 @@
     <string name="terminal_cp_copied">Copiado: %1$s -&gt; %2$s\n</string>
     <string name="terminal_cp_error">cp: error al copiar %1$s\n</string>
     <string name="terminal_unrecognized_cmd">Comando no reconocido: %1$s\nEscriba \'help\' o \'?\' para ver los comandos disponibles.\n</string>
-    <string name="terminal_sandbox_help"><![CDATA[======================================================
-  Terminal Sandbox - Comandos del Entorno
-======================================================
-
-COMANDOS INTEGRADOS DEL SANDBOX:
-  ls [-a] [dir]           Listar archivos y directorios
-  pwd                     Mostrar ruta del directorio actual
-  cd <dir>                Cambiar directorio ('cd ~' para inicio)
-  cat <archivo>           Ver contenido de un archivo de texto
-  touch <archivo>         Crear archivo vacío o actualizar fecha
-  mkdir [-p] <dir>        Crear un nuevo directorio
-  rm [-r|-rf] <objetivo>  Eliminar archivo o directorio
-  cp [-r] <origen> <dst>  Copiar archivo o directorio
-  echo <texto>            Imprimir texto en la terminal
-  clear / cls             Limpiar el historial de la pantalla
-  help / ?                Mostrar esta ayuda del sandbox
-
-======================================================
-  EJECUCIÓN DEL BINARIO NATIVO REAL (MORIA)
-======================================================
-Desde la caja de comandos inferior puede ejecutar directamente
-el binario nativo real con cualquier comando u opción:
-
-  moria [opciones] <archivo|directorio>
-
-EJEMPLOS:
-  moria firmware.bin          Identificar firmware
-  moria -e firmware.bin       Extraer sistemas de archivos
-  moria -c firmware.bin       Cortar (carve) flujos de bytes
-  moria -A firmware.bin       Inspección profunda completa
-  moria -E firmware.bin       Análisis de entropía
-  moria --list firmware.bin   Listar contenidos sin extraer
-  moria -e file.bin | grep sq Tuberías y filtros shell
-
-Para ver la ayuda nativa completa del binario Moria, ejecute:
-  moria --help
-======================================================
-]]></string>
 </resources>

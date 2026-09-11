@@ -97,42 +97,4 @@
     <string name="terminal_cp_copied">Copied: %1$s -&gt; %2$s\n</string>
     <string name="terminal_cp_error">cp: error copying %1$s\n</string>
     <string name="terminal_unrecognized_cmd">Unrecognized command: %1$s\nType \'help\' or \'?\' to see available commands.\n</string>
-    <string name="terminal_sandbox_help"><![CDATA[======================================================
-  Terminal Sandbox - Environment Commands
-======================================================
-
-BUILT-IN SANDBOX COMMANDS:
-  ls [-a] [dir]           List files and directories
-  pwd                     Print current working directory path
-  cd <dir>                Change directory ('cd ~' for home)
-  cat <file>              Display text file contents
-  touch <file>            Create empty file or update timestamp
-  mkdir [-p] <dir>        Create a new directory
-  rm [-r|-rf] <target>    Remove file or directory
-  cp [-r] <src> <dst>     Copy file or directory
-  echo <text>             Print text to terminal
-  clear / cls             Clear terminal screen
-  help / ?                Display this sandbox help
-
-======================================================
-  REAL NATIVE BINARY EXECUTION (MORIA)
-======================================================
-From the bottom command input, you can directly run
-the real native binary with any command or option:
-
-  moria [options] <file|dir>
-
-EXAMPLES:
-  moria firmware.bin          Identify firmware structures
-  moria -e firmware.bin       Extract filesystems and archives
-  moria -c firmware.bin       Carve raw byte streams
-  moria -A firmware.bin       Full deep analysis
-  moria -E firmware.bin       Entropy analysis pass
-  moria --list firmware.bin   List archive contents without extraction
-  moria -e file.bin | grep sq Shell pipes and filters
-
-To view full native help for the Moria binary, run:
-  moria --help
-======================================================
-]]></string>
 </resources>
