@@ -232,45 +232,31 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Barra de Entrada de Comandos Personalizados -->
-        <LinearLayout
+        <!-- Consola de Salida UNIX / Terminal -->
+        <com.diamon.moria.ui.views.LogScrollView
+            android:id="@+id/scrollLog"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="1.0"
+            android:background="@color/terminal_black"
+            android:descendantFocusability="blocksDescendants"
+            android:padding="6dp"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="3dp">
 
-            <EditText
-                android:id="@+id/etCommand"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:background="#1B1E2B"
+            <TextView
+                android:id="@+id/tvLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="monospace"
-                android:hint="@string/str_hint_comando"
-                android:imeOptions="actionSend"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:textColor="#4DB6AC"
-                android:textColorHint="#757575"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/btnRun"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginStart="4dp"
-                android:minHeight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:text="@string/str_enviar"
-                android:textColor="@color/btn_text_color"
+                android:lineSpacingExtra="2dp"
+                android:longClickable="true"
+                android:textColor="@color/terminal_green"
+                android:textIsSelectable="true"
                 android:textSize="12sp"
-                app:backgroundTint="@color/btn_tint_blue" />
-        </LinearLayout>
+                android:text="--- Moria Firmware Extractor Terminal ---\nType \'help\' for available commands.\n\n" />
+
+        </com.diamon.moria.ui.views.LogScrollView>
 
         <!-- Barra de Controles Rápidos y Navegación de Terminal -->
         <HorizontalScrollView
@@ -445,29 +431,45 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <!-- Consola de Salida UNIX / Terminal -->
-        <com.diamon.moria.ui.views.LogScrollView
-            android:id="@+id/scrollLog"
+        <!-- Barra de Entrada de Comandos Personalizados (Al Fondo) -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.0"
-            android:background="@color/terminal_black"
-            android:descendantFocusability="blocksDescendants"
-            android:padding="6dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp">
 
-            <TextView
-                android:id="@+id/tvLog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/etCommand"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="#1B1E2B"
                 android:fontFamily="monospace"
-                android:lineSpacingExtra="2dp"
-                android:longClickable="true"
-                android:textColor="@color/terminal_green"
-                android:textIsSelectable="true"
-                android:textSize="12sp"
-                android:text="--- Moria Firmware Extractor Terminal ---\nType 'help' for available commands.\n\n" />
+                android:hint="@string/str_hint_comando"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#4DB6AC"
+                android:textColorHint="#757575"
+                android:textSize="12sp" />
 
-        </com.diamon.moria.ui.views.LogScrollView>
+            <Button
+                android:id="@+id/btnRun"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="4dp"
+                android:minHeight="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="@string/str_enviar"
+                android:textColor="@color/btn_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@color/btn_tint_blue" />
+        </LinearLayout>
 
     </LinearLayout>
 
