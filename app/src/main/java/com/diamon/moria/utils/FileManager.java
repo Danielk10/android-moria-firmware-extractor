@@ -82,6 +82,8 @@ public class FileManager {
             return true;
         }
         return name.equalsIgnoreCase("usr") || 
+               name.equalsIgnoreCase("bin") || 
+               name.equalsIgnoreCase("lib") || 
                name.equalsIgnoreCase("cache") || 
                name.equalsIgnoreCase("code_cache") || 
                name.equalsIgnoreCase("app_webview") || 

@@ -55,9 +55,16 @@
             android:insetBottom="0dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
             android:text="@string/btn_select_target"
             android:textColor="@color/btn_text_color"
-            android:textSize="12sp"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="8sp"
+            app:autoSizeMaxTextSize="11sp"
             app:backgroundTint="@color/btn_tint_blue"
             android:layout_marginBottom="3dp" />
 
@@ -93,9 +100,16 @@
                 android:insetBottom="0dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@string/btn_identify"
                 android:textColor="@color/btn_text_color"
-                android:textSize="12sp"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeMaxTextSize="11sp"
                 app:backgroundTint="@color/btn_tint_teal" />
 
             <Space
@@ -112,9 +126,16 @@
                 android:insetBottom="0dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@string/btn_extract"
                 android:textColor="@color/btn_text_color"
-                android:textSize="12sp"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeMaxTextSize="11sp"
                 app:backgroundTint="@color/btn_tint_green" />
         </LinearLayout>
 
@@ -135,9 +156,16 @@
                 android:insetBottom="0dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@string/btn_carve"
                 android:textColor="@color/btn_text_color"
-                android:textSize="12sp"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeMaxTextSize="11sp"
                 app:backgroundTint="@color/btn_tint_purple" />
 
             <Space
@@ -154,9 +182,16 @@
                 android:insetBottom="0dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@string/btn_entropy"
                 android:textColor="@color/btn_text_color"
-                android:textSize="12sp"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeMaxTextSize="11sp"
                 app:backgroundTint="@color/btn_tint_orange" />
         </LinearLayout>
 
@@ -177,9 +212,16 @@
                 android:insetBottom="0dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@string/btn_list"
                 android:textColor="@color/btn_text_color"
-                android:textSize="12sp"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeMaxTextSize="11sp"
                 app:backgroundTint="@color/btn_tint_blue" />
 
             <Space
@@ -196,9 +238,16 @@
                 android:insetBottom="0dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@string/btn_scan_all"
                 android:textColor="@color/btn_text_color"
-                android:textSize="12sp"
+                android:textSize="11sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="8sp"
+                app:autoSizeMaxTextSize="11sp"
                 app:backgroundTint="@color/btn_tint_darkred" />
         </LinearLayout>
 
@@ -354,7 +403,7 @@
                     android:focusable="false"
                     android:src="@drawable/ic_delete"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/terminal_cd_delete"
+                    android:contentDescription="@string/terminal_cd_clear"
                     app:tint="@color/terminal_green"
                     android:layout_marginStart="1dp"
                     android:layout_marginEnd="2dp" />
@@ -383,20 +432,6 @@
                     android:src="@drawable/ic_copy"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/terminal_cd_copy"
-                    app:tint="@color/terminal_green"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="2dp" />
-
-                <ImageButton
-                    android:id="@+id/btnClear"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:scaleType="centerInside"
-                    android:padding="5dp"
-                    android:focusable="false"
-                    android:src="@drawable/ic_clear"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/terminal_cd_clear"
                     app:tint="@color/terminal_green"
                     android:layout_marginStart="1dp"
                     android:layout_marginEnd="2dp" />

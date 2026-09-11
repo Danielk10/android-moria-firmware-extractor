@@ -8,7 +8,7 @@
     <string name="menu_about_licenses">About &amp; Licenses</string>
     <string name="str_enviar">Run</string>
     <string name="str_close">Close</string>
-    <string name="str_hint_comando">e.g. moria -e firmware.bin | ls -l | cat</string>
+    <string name="str_hint_comando">moria [options] &lt;file&gt;</string>
     <string name="str_logs_copied">Logs copied to clipboard.</string>
     <string name="str_no_logs_to_copy">No logs to copy.</string>
     <string name="str_export_success">%1$d file(s) exported to Downloads/%2$s</string>
@@ -36,14 +36,14 @@
     
     <!-- UI Buttons & Controls for Moria -->
     <string name="btn_select_target">Select Firmware</string>
-    <string name="btn_identify">Identify Formats</string>
-    <string name="btn_extract">Extract All (-e)</string>
-    <string name="btn_carve">Carve Bytes (-c)</string>
-    <string name="btn_entropy">Entropy Analysis (-E)</string>
-    <string name="btn_list">List Contents (--list)</string>
-    <string name="btn_scan_all">Deep Scan (-A)</string>
+    <string name="btn_identify">Identify</string>
+    <string name="btn_extract">Extract (-e)</string>
+    <string name="btn_carve">Carve (-c)</string>
+    <string name="btn_entropy">Entropy (-E)</string>
+    <string name="btn_list">List (-l)</string>
+    <string name="btn_scan_all">Deep (-A)</string>
     <string name="cb_json">JSON (-j)</string>
-    <string name="cb_broad">Broad formats (--broad)</string>
+    <string name="cb_broad">Broad (--broad)</string>
     <string name="target_none">Target: No file selected (Tap to select)</string>
     <string name="target_selected">Target: %1$s (%2$s)</string>
     <string name="select_target_prompt">Please select a firmware file first.</string>
