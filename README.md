@@ -274,12 +274,17 @@ chmod 700 build_libarchive_moria_custom.sh build_moria_custom.sh
 
 ---
 
-## 9) Autor, Licencias y Créditos
+## 9) Créditos, Autoría y Licencias
 
-### Autor de la Aplicación Android
-- **Danielk10** — [GitHub: @Danielk10](https://github.com/Danielk10) — [danielpdiamon@gmail.com](mailto:danielpdiamon@gmail.com)
+### 🌟 Autor y Creador de la Herramienta Original C++ (Moria)
+- **Matt Brown ([@nmatt0](https://github.com/nmatt0))** — Creador y autor principal del motor nativo de firmware **Moria**:  
+  Repositorio oficial: [https://github.com/nmatt0/moria](https://github.com/nmatt0/moria) &bull; **Licencia MIT**
 
-### Licencia del Proyecto Android
+### 📱 Desarrollador de la Versión y Adaptación para Android
+- **Danielk10** — [GitHub: @Danielk10](https://github.com/Danielk10) — [danielpdiamon@gmail.com](mailto:danielpdiamon@gmail.com)  
+  *Desarrollo de la interfaz táctil, terminal sandbox UNIX, integración JNI y empaquetado móvil.*
+
+### 📄 Licencia del Proyecto Android
 Este proyecto está licenciado bajo la **Licencia Apache 2.0**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ### Proyectos Originales y Componentes de Terceros
