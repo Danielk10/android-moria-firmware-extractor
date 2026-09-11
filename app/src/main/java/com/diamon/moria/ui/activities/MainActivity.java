@@ -3,8 +3,11 @@ package com.diamon.moria.ui.activities;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -480,11 +483,13 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
 
     private void showAboutAndLicensesDialog() {
         ScrollView scrollView = new ScrollView(this);
+        scrollView.setBackgroundColor(ContextCompat.getColor(this, R.color.surface_dark));
+
         TextView dialogText = new TextView(this);
         int padding = (int) (18 * getResources().getDisplayMetrics().density);
         dialogText.setPadding(padding, padding, padding, padding);
         dialogText.setMovementMethod(LinkMovementMethod.getInstance());
-        dialogText.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+        dialogText.setTextColor(Color.WHITE);
         dialogText.setLinkTextColor(ContextCompat.getColor(this, R.color.secondary));
         dialogText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         String html = getString(R.string.str_about_licenses_html);
@@ -498,11 +503,23 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
         }
         scrollView.addView(dialogText);
 
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.CustomDarkDialogTheme)
                 .setTitle(R.string.about_licenses_dialog_title)
                 .setView(scrollView)
                 .setPositiveButton(R.string.str_close, null)
-                .show();
+                .create();
+
+        dialog.setOnShowListener(d -> {
+            if (dialog.getWindow() != null) {
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.surface_dark)));
+            }
+            Button posBtn = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            if (posBtn != null) {
+                posBtn.setTextColor(ContextCompat.getColor(this, R.color.secondary));
+            }
+        });
+
+        dialog.show();
     }
 
     // Callbacks de TerminalExecutor

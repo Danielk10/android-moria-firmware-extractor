@@ -12,7 +12,7 @@ import com.diamon.moria.R;
 
 public class PolicyActivity extends AppCompatActivity {
 
-    public static final String PROVISIONAL_POLICY_URL = "https://todoandroid.42web.io/privacy-policy.html";
+    public static final String PROVISIONAL_POLICY_URL = "https://example.com/privacy-policy";
     private static final String LOCAL_POLICY_URL = "file:///android_asset/privacy-policy.html";
 
     private WebView webView;
@@ -36,15 +36,13 @@ public class PolicyActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                // Si falla la carga del enlace provisional por falta de internet o servidor caido, cargar fallback local
                 if (request.isForMainFrame()) {
                     view.loadUrl(LOCAL_POLICY_URL);
                 }
             }
         });
 
-        // Cargar enlace provisional online
-        webView.loadUrl(PROVISIONAL_POLICY_URL);
+        webView.loadUrl(LOCAL_POLICY_URL);
     }
 
     @Override
