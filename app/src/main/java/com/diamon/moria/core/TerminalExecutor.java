@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.diamon.moria.R;
+
 public class TerminalExecutor {
     private static final String TAG = "TerminalExecutor";
 
@@ -67,7 +69,7 @@ public class TerminalExecutor {
         if (p != null) {
             try {
                 p.destroyForcibly();
-                postOutput("\n[PROCESO ABORTADO POR EL USUARIO]\n");
+                postOutput(context.getString(R.string.log_process_aborted));
             } catch (Exception e) {
                 Log.e(TAG, "Error abortando proceso: " + e.getMessage());
             }
@@ -550,7 +552,7 @@ public class TerminalExecutor {
             postFinished(exitCode);
 
         } catch (Exception e) {
-            postOutput("\n[ERROR DE EJECUCIÓN]: " + e.getMessage() + "\n");
+            postOutput(context.getString(R.string.log_execution_error, e.getMessage()));
             postFinished(1);
         }
     }

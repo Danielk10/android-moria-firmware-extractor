@@ -254,7 +254,7 @@
                 android:textColor="@color/terminal_green"
                 android:textIsSelectable="true"
                 android:textSize="12sp"
-                android:text="--- Moria Firmware Extractor Terminal ---\nType \'help\' for available commands.\n\n" />
+                android:text="@string/terminal_welcome_banner" />
 
         </com.diamon.moria.ui.views.LogScrollView>
 

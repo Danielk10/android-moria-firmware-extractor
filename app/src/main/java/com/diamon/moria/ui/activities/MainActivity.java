@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                         } catch (Exception ignored) {}
 
                         prefs.edit().putString(KEY_WORK_DIR, treeUri.toString()).apply();
-                        appendLog("[SISTEMA] Espacio de trabajo configurado: " + treeUri + "\n");
+                        appendLog(getString(R.string.log_system_work_dir, treeUri.toString()));
                     }
                 }
             });
@@ -189,9 +189,9 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                 layoutLoading.setVisibility(View.GONE);
                 layoutMainUI.setVisibility(View.VISIBLE);
                 if (ready) {
-                    appendLog("[INICIALIZACIÓN] " + getString(R.string.str_log_runtime_ready) + "\n");
+                    appendLog(getString(R.string.log_init_prefix, getString(R.string.str_log_runtime_ready)));
                 } else {
-                    appendLog("[ADVERTENCIA] " + getString(R.string.str_log_runtime_failed) + "\n");
+                    appendLog(getString(R.string.log_warning_prefix, getString(R.string.str_log_runtime_failed)));
                 }
             });
         }).start();
@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
         if (files != null) {
             for (File f : files) {
                 if (f.getName().startsWith(".")) continue;
-                String label = f.isDirectory() ? "[DIR] " + f.getName() : f.getName();
+                String label = f.isDirectory() ? getString(R.string.log_dir_tag, f.getName()) : f.getName();
                 displayNames.add(label);
                 targetFiles.add(f);
             }
@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                     } else {
                         currentTargetFile = targetFiles.get(which);
                         updateTargetDisplay();
-                        appendLog("[OBJETIVO] Seleccionado: " + currentTargetFile.getName() + "\n");
+                        appendLog(getString(R.string.log_target_selected, currentTargetFile.getName()));
                     }
                 })
                 .setNegativeButton(R.string.str_close, null)
@@ -401,11 +401,11 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
             updateTargetDisplay();
             String sizeStr = destFile.length() < 1024 ? destFile.length() + " B" : (destFile.length() / 1024) + " KB";
             String msg = getString(R.string.str_file_imported, name, sizeStr);
-            appendLog("[IMPORTADO] " + msg + "\n");
+            appendLog(getString(R.string.log_imported_prefix, msg));
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         } else {
             String err = getString(R.string.str_file_import_error, name);
-            appendLog("[ERROR] " + err + "\n");
+            appendLog(getString(R.string.log_error_prefix, err));
             Toast.makeText(this, err, Toast.LENGTH_LONG).show();
         }
     }
@@ -416,14 +416,14 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
 
         if (!exported.isEmpty()) {
             String msg = getString(R.string.str_export_success, exported.size(), FileManager.DEFAULT_DOWNLOADS_FOLDER);
-            appendLog("\n[EXPORTACIÓN EXITOSA]\n" + msg + ":\n");
+            appendLog(getString(R.string.log_export_success_header, msg));
             for (String file : exported) {
                 appendLog("  • " + file + "\n");
             }
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         } else {
             String msg = getString(R.string.str_export_none);
-            appendLog("\n[EXPORTACIÓN] " + msg + "\n");
+            appendLog(getString(R.string.log_export_none_header, msg));
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }
@@ -436,7 +436,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
         }
 
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("Moria Logs", text);
+        ClipData clip = ClipData.newPlainText(getString(R.string.app_name), text);
         if (clipboard != null) {
             clipboard.setPrimaryClip(clip);
             Toast.makeText(this, R.string.str_logs_copied, Toast.LENGTH_SHORT).show();

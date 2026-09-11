@@ -61,4 +61,18 @@
     <!-- About & Licenses Unified Dialog -->
     <string name="about_licenses_dialog_title">Acerca de y Licencias</string>
     <string name="str_about_licenses_html"><![CDATA[<h2>Moria Firmware Extractor</h2><p>Aplicación avanzada para inspección forense de imágenes de firmware, extracción profunda de contenedores, descompresión de sistemas de archivos y análisis de entropía mediante <b>moria</b> nativo y <b>libarchive</b>.</p><p><b>Flujo de Trabajo (Pipeline):</b><br/><code>moria -e firmware.bin &rarr; mithril firmware.bin.extracted/</code></p><hr/><b>Autor de la aplicación Android:</b><br/>Daniel Elias Diamon Vazquez<br/><br/><b>Herramienta CLI original:</b><br/><b>moria</b> desarrollada por <b>nmatt0</b> &mdash; Licencia Apache 2.0 / BSD<br/><a href="https://github.com/nmatt0/moria">https://github.com/nmatt0/moria</a><br/><br/><b>Licencia del proyecto Android:</b> Apache License 2.0<br/><b>Repositorio GitHub:</b> <a href="https://github.com/Danielk10/android-moria-firmware-extractor">Danielk10/android-moria-firmware-extractor</a><br/><hr/><h3>Licencias de Código Abierto</h3><p>Este software integra los siguientes componentes y bibliotecas de código abierto:</p><ul><li><b>Moria CLI</b> &mdash; Apache License 2.0 / BSD (<a href="https://github.com/nmatt0/moria">nmatt0/moria</a>)</li><li><b>libarchive</b> &mdash; Licencia BSD 2-Cláusulas (<a href="https://github.com/libarchive/libarchive">libarchive.org</a>)</li><li><b>bsdunzip</b> &mdash; Licencia BSD 2-Cláusulas</li><li><b>ICU (Unicode Components)</b> &mdash; Licencia Unicode / ICU (<a href="https://icu.unicode.org">icu.unicode.org</a>)</li><li><b>OpenSSL / libcrypto</b> &mdash; Licencia Apache 2.0 (<a href="https://www.openssl.org">openssl.org</a>)</li><li><b>Zstandard (libzstd)</b> &mdash; Licencia BSD 3-Cláusulas (<a href="https://facebook.github.io/zstd/">facebook/zstd</a>)</li><li><b>LZ4 (liblz4)</b> &mdash; Licencia BSD 2-Cláusulas (<a href="https://lz4.org">lz4.org</a>)</li><li><b>XZ / liblzma</b> &mdash; Dominio Público / LGPL 2.1 (<a href="https://tukaani.org/xz/">tukaani.org/xz</a>)</li><li><b>zlib</b> &mdash; Licencia zlib (<a href="https://zlib.net">zlib.net</a>)</li><li><b>libxml2</b> &mdash; Licencia MIT (<a href="https://gitlab.gnome.org/GNOME/libxml2">xmlsoft.org</a>)</li><li><b>libiconv y libcharset</b> &mdash; Licencia LGPL 2.1</li><li><b>libacl</b> &mdash; Licencia LGPL 2.1</li></ul>]]></string>
+
+    <!-- Terminal & Log Format Strings -->
+    <string name="terminal_welcome_banner">--- Moria Firmware Extractor Terminal ---\nEscriba \'help\' para ver los comandos disponibles.\n\n</string>
+    <string name="log_system_work_dir">[SISTEMA] Espacio de trabajo configurado: %1$s\n</string>
+    <string name="log_init_prefix">[INICIALIZACIÓN] %1$s\n</string>
+    <string name="log_warning_prefix">[ADVERTENCIA] %1$s\n</string>
+    <string name="log_target_selected">[OBJETIVO] Seleccionado: %1$s\n</string>
+    <string name="log_imported_prefix">[IMPORTADO] %1$s\n</string>
+    <string name="log_error_prefix">[ERROR] %1$s\n</string>
+    <string name="log_export_success_header">\n[EXPORTACIÓN EXITOSA]\n%1$s:\n</string>
+    <string name="log_export_none_header">\n[EXPORTACIÓN] %1$s\n</string>
+    <string name="log_dir_tag">[DIR] %1$s</string>
+    <string name="log_process_aborted">\n[PROCESO ABORTADO POR EL USUARIO]\n</string>
+    <string name="log_execution_error">\n[ERROR DE EJECUCIÓN]: %1$s\n</string>
 </resources>
