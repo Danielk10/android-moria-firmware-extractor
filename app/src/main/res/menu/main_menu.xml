@@ -19,7 +19,7 @@
 
     <item
         android:id="@+id/action_policy"
-        android:title="@string/str_polticas_de_pri"
+        android:title="@string/menu_policy"
         app:showAsAction="never" />
 
     <item

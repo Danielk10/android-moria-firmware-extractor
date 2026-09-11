@@ -24,7 +24,7 @@ public class PolicyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_policy);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.str_polticas_de_pri);
+            getSupportActionBar().setTitle(R.string.menu_policy);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 

@@ -6,29 +6,21 @@
     <string name="menu_export_downloads">Export Files to Downloads</string>
     <string name="menu_policy">Privacy Policy</string>
     <string name="menu_about_licenses">About &amp; Licenses</string>
-    <string name="str_polticas_de_pri">Privacy Policy</string>
-    <string name="str_terminal_salida">Terminal Console</string>
-    <string name="str_detener">Abort</string>
-    <string name="str_limpiar">Clear</string>
-    <string name="str_copiar">Copy</string>
     <string name="str_enviar">Run</string>
     <string name="str_close">Close</string>
     <string name="str_hint_comando">e.g. moria -e firmware.bin | ls -l | cat</string>
-    <string name="str_working_dir_label">Workspace: %1$s</string>
     <string name="str_logs_copied">Logs copied to clipboard.</string>
     <string name="str_no_logs_to_copy">No logs to copy.</string>
     <string name="str_export_success">%1$d file(s) exported to Downloads/%2$s</string>
     <string name="str_export_none">No files found to export in current workspace.</string>
     <string name="str_file_imported">File imported successfully: %1$s (%2$s)</string>
     <string name="str_file_import_error">Error importing file: %1$s</string>
-    <string name="str_status_ready">Ready</string>
     <string name="str_status_running">Executing: %1$s</string>
     <string name="str_preparando_depe">Preparing native dependencies and runtime...</string>
     <string name="str_extracting_libs">Extracting libraries and runtime components...</string>
     <string name="str_verifying_dependencies">Verifying dependencies and symbolic links...</string>
     <string name="str_log_runtime_ready">Native runtime prepared and verified successfully.</string>
     <string name="str_log_runtime_failed">Warning: Runtime verification completed with warnings.</string>
-    <string name="toast_work_dir_set">Workspace configured: %1$s</string>
 
     <!-- Terminal Toolbar Helper Tooltips -->
     <string name="terminal_cd_prev">Previous command in history</string>

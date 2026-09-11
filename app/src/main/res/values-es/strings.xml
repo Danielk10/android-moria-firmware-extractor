@@ -6,29 +6,21 @@
     <string name="menu_export_downloads">Exportar Archivos a Descargas</string>
     <string name="menu_policy">Políticas de Privacidad</string>
     <string name="menu_about_licenses">Acerca de y Licencias</string>
-    <string name="str_polticas_de_pri">Políticas de Privacidad</string>
-    <string name="str_terminal_salida">Consola de Terminal</string>
-    <string name="str_detener">Detener</string>
-    <string name="str_limpiar">Limpiar</string>
-    <string name="str_copiar">Copiar</string>
     <string name="str_enviar">Ejecutar</string>
     <string name="str_close">Cerrar</string>
     <string name="str_hint_comando">Ej: moria -e firmware.bin | ls -l | cat</string>
-    <string name="str_working_dir_label">Espacio: %1$s</string>
     <string name="str_logs_copied">Registros copiados al portapapeles.</string>
     <string name="str_no_logs_to_copy">No hay registros para copiar.</string>
     <string name="str_export_success">%1$d archivo(s) exportados a Descargas/%2$s</string>
     <string name="str_export_none">No se encontraron archivos para exportar en el espacio actual.</string>
     <string name="str_file_imported">Archivo importado con éxito: %1$s (%2$s)</string>
     <string name="str_file_import_error">Error al importar archivo: %1$s</string>
-    <string name="str_status_ready">Listo</string>
     <string name="str_status_running">Ejecutando: %1$s</string>
     <string name="str_preparando_depe">Preparando dependencias y runtime nativo...</string>
     <string name="str_extracting_libs">Extrayendo librerías y componentes del runtime...</string>
     <string name="str_verifying_dependencies">Verificando dependencias y enlaces simbólicos...</string>
     <string name="str_log_runtime_ready">Runtime nativo preparado y verificado exitosamente.</string>
     <string name="str_log_runtime_failed">Aviso: La verificación de dependencias finalizó con advertencias.</string>
-    <string name="toast_work_dir_set">Espacio de trabajo configurado: %1$s</string>
 
     <!-- Terminal Toolbar Helper Tooltips -->
     <string name="terminal_cd_prev">Comando anterior en el historial</string>
