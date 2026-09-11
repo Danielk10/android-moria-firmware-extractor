@@ -12,7 +12,6 @@ import com.diamon.moria.R;
 
 public class PolicyActivity extends AppCompatActivity {
 
-    public static final String PROVISIONAL_POLICY_URL = "https://example.com/privacy-policy";
     private static final String LOCAL_POLICY_URL = "file:///android_asset/privacy-policy.html";
 
     private WebView webView;

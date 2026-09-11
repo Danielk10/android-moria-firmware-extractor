@@ -20,6 +20,9 @@
     <string name="str_folder_import_error">Error al importar carpeta: %1$s</string>
     <string name="str_folder_importing">Importando %1$s: %2$d archivos copiados...</string>
     <string name="str_files_imported">%1$d archivo(s) importados con éxito.</string>
+    <string name="str_item_count">%1$d elementos</string>
+    <string name="str_folder_default_name">directorio</string>
+    <string name="str_multi_files_label">múltiples archivos</string>
     <string name="str_status_running">Ejecutando: %1$s</string>
     <string name="str_preparando_depe">Preparando dependencias y runtime nativo...</string>
     <string name="str_extracting_libs">Extrayendo librerías y componentes del runtime...</string>
@@ -33,7 +36,6 @@
     <string name="terminal_cd_left">Mover cursor a la izquierda</string>
     <string name="terminal_cd_right">Mover cursor a la derecha</string>
     <string name="terminal_cd_tab">Insertar tabulación (4 espacios)</string>
-    <string name="terminal_cd_delete">Borrar carácter (Retroceso)</string>
     <string name="terminal_cd_paste">Pegar del portapapeles</string>
     <string name="terminal_cd_copy">Copiar registros al portapapeles</string>
     <string name="terminal_cd_clear">Limpiar pantalla de la terminal</string>

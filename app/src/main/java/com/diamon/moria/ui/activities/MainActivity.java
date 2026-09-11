@@ -231,11 +231,12 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
             if (currentTargetFile.isDirectory()) {
                 File[] sub = currentTargetFile.listFiles();
                 int count = sub != null ? sub.length : 0;
-                sizeStr = count + " items";
+                sizeStr = getString(R.string.str_item_count, count);
             } else {
                 sizeStr = currentTargetFile.length() < 1024 ? currentTargetFile.length() + " B" : (currentTargetFile.length() / 1024) + " KB";
             }
-            tvTarget.setText(getString(R.string.target_selected, currentTargetFile.getName(), sizeStr));
+            String displayName = currentTargetFile.isDirectory() ? getString(R.string.log_dir_tag, currentTargetFile.getName()) : currentTargetFile.getName();
+            tvTarget.setText(getString(R.string.target_selected, displayName, sizeStr));
         } else {
             currentTargetFile = null;
             tvTarget.setText(R.string.target_none);
@@ -354,7 +355,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
             });
             for (File f : files) {
                 if (FileManager.shouldIgnore(f)) continue;
-                displayNames.add(f.isDirectory() ? "[DIR] " + f.getName() : f.getName());
+                displayNames.add(f.isDirectory() ? getString(R.string.log_dir_tag, f.getName()) : f.getName());
                 targetFiles.add(f);
             }
         }
@@ -484,7 +485,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                     appendLog(getString(R.string.log_imported_prefix, msg));
                     Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                 } else {
-                    String err = getString(R.string.str_file_import_error, "multi-files");
+                    String err = getString(R.string.str_file_import_error, getString(R.string.str_multi_files_label));
                     appendLog(getString(R.string.log_error_prefix, err));
                     Toast.makeText(MainActivity.this, err, Toast.LENGTH_LONG).show();
                 }
@@ -493,9 +494,10 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     }
 
     private void importFolderToWorkspace(Uri treeUri) {
+        String defaultDirName = getString(R.string.str_folder_default_name);
         tvStatus.setVisibility(View.VISIBLE);
-        tvStatus.setText(getString(R.string.str_folder_importing, "...", 0));
-        appendLog(getString(R.string.log_init_prefix, getString(R.string.str_folder_importing, "directorio", 0)));
+        tvStatus.setText(getString(R.string.str_folder_importing, defaultDirName, 0));
+        appendLog(getString(R.string.log_init_prefix, getString(R.string.str_folder_importing, defaultDirName, 0)));
 
         new Thread(() -> {
             File workDir = terminalExecutor.getCurrentWorkDir();
@@ -522,7 +524,7 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
                     appendLog(getString(R.string.log_imported_prefix, msg));
                     Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
                 } else {
-                    String folderName = "directorio";
+                    String folderName = defaultDirName;
                     try {
                         androidx.documentfile.provider.DocumentFile doc = androidx.documentfile.provider.DocumentFile.fromTreeUri(MainActivity.this, treeUri);
                         if (doc != null && doc.getName() != null) folderName = doc.getName();

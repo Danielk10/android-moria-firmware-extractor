@@ -20,6 +20,9 @@
     <string name="str_folder_import_error">Error importing folder: %1$s</string>
     <string name="str_folder_importing">Importing %1$s: %2$d files copied...</string>
     <string name="str_files_imported">%1$d file(s) imported successfully.</string>
+    <string name="str_item_count">%1$d items</string>
+    <string name="str_folder_default_name">directory</string>
+    <string name="str_multi_files_label">multiple files</string>
     <string name="str_status_running">Executing: %1$s</string>
     <string name="str_preparando_depe">Preparing native dependencies and runtime...</string>
     <string name="str_extracting_libs">Extracting libraries and runtime components...</string>
@@ -33,7 +36,6 @@
     <string name="terminal_cd_left">Move cursor left</string>
     <string name="terminal_cd_right">Move cursor right</string>
     <string name="terminal_cd_tab">Insert tab / 4 spaces</string>
-    <string name="terminal_cd_delete">Backspace character</string>
     <string name="terminal_cd_paste">Paste from clipboard</string>
     <string name="terminal_cd_copy">Copy logs to clipboard</string>
     <string name="terminal_cd_clear">Clear terminal</string>

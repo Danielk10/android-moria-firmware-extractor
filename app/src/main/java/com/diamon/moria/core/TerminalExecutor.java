@@ -271,13 +271,6 @@ public class TerminalExecutor {
         postFinished(0);
     }
 
-    private boolean tokensHasFlag(String[] tokens, String flag) {
-        for (String t : tokens) {
-            if (flag.equals(t)) return true;
-        }
-        return false;
-    }
-
     private void executeCat(String[] tokens) {
         if (tokens.length < 2) {
             postOutput(context.getString(R.string.terminal_cat_usage));
