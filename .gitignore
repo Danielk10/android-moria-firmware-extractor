@@ -2,8 +2,8 @@
 build/
 
 # Código fuente descargado
-libarchive_moria/
-moria/
+/libarchive_moria/
+/moria/
 
 # Objetos y binarios
 *.o

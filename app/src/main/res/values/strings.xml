@@ -6,8 +6,11 @@
     <string name="menu_export_downloads">Export Files to Downloads</string>
     <string name="menu_copy_logs">Copy Logs to Clipboard</string>
     <string name="menu_clear_terminal">Clear Terminal</string>
+    <string name="menu_licenses">Open Source Licenses</string>
+    <string name="menu_policy">Privacy Policy</string>
+    <string name="menu_about">About</string>
     <string name="str_polticas_de_pri">Privacy Policy</string>
-    <string name="str_acerca_de">About and Licenses</string>
+    <string name="str_acerca_de">About Moria</string>
     <string name="str_terminal_salida">Terminal Console</string>
     <string name="str_detener">Abort</string>
     <string name="str_limpiar">Clear</string>
@@ -24,6 +27,24 @@
     <string name="str_file_import_error">Error importing file: %1$s</string>
     <string name="str_status_ready">Ready</string>
     <string name="str_status_running">Executing: %1$s</string>
+    <string name="str_preparando_depe">Preparing native dependencies and runtime...</string>
+    <string name="str_extracting_libs">Extracting libraries and runtime components...</string>
+    <string name="str_verifying_dependencies">Verifying dependencies and symbolic links...</string>
+    <string name="str_log_runtime_ready">Native runtime prepared and verified successfully.</string>
+    <string name="str_log_runtime_failed">Warning: Runtime verification completed with warnings.</string>
+    <string name="toast_work_dir_set">Workspace configured: %1$s</string>
+
+    <!-- Terminal Toolbar Helper Tooltips -->
+    <string name="terminal_cd_prev">Previous command in history</string>
+    <string name="terminal_cd_next">Next command in history</string>
+    <string name="terminal_cd_left">Move cursor left</string>
+    <string name="terminal_cd_right">Move cursor right</string>
+    <string name="terminal_cd_tab">Insert tab / 4 spaces</string>
+    <string name="terminal_cd_delete">Backspace character</string>
+    <string name="terminal_cd_paste">Paste from clipboard</string>
+    <string name="terminal_cd_copy">Copy logs to clipboard</string>
+    <string name="terminal_cd_clear">Clear terminal</string>
+    <string name="terminal_cd_abort">Abort running process</string>
     
     <!-- UI Buttons & Controls for Moria -->
     <string name="btn_select_target">Select Firmware File</string>
@@ -39,5 +60,9 @@
     <string name="target_selected">Target: %1$s (%2$s)</string>
     <string name="select_target_prompt">Please select a firmware file first.</string>
 
-    <string name="str_about_html"><![CDATA[<h2>Moria Firmware Extractor</h2><p>Advanced application for forensic firmware extraction, archive unpacking, image parsing, and hardware reverse engineering powered by native <b>moria</b> and <b>libarchive</b>.</p><hr/><b>Project License:</b> Apache 2.0<br/><b>Author:</b> Daniel Elias Diamon Vazquez<br/><b>GitHub:</b> <a href="https://github.com/Danielk10/moria-firmware-extractor">moria-firmware-extractor</a><br/><br/><b>Third-Party Libraries and Components:</b><br/>• <a href="https://github.com/nmatt0/moria">moria</a> by nmatt0 (Apache 2.0 / BSD)<br/>• <a href="https://github.com/libarchive/libarchive">libarchive</a> (BSD 2-Clause)<br/>• <b>bsdunzip</b> (BSD 2-Clause)<br/>• Compression runtimes: lz4, lzma, zlib, zstd, openssl crypto, xml2, acl.<br/>]]></string>
+    <!-- About & Licenses Dialogs -->
+    <string name="str_about_html"><![CDATA[<h2>Moria Firmware Extractor</h2><p>Advanced application for forensic firmware extraction, archive unpacking, image parsing, and hardware reverse engineering powered by native <b>moria</b> and <b>libarchive</b>.</p><p><b>Pipeline Workflow:</b><br/><code>moria -e firmware.bin &rarr; mithril firmware.bin.extracted/</code></p><hr/><b>Project License:</b> Apache 2.0<br/><b>Author:</b> Daniel Elias Diamon Vazquez<br/><b>GitHub:</b> <a href="https://github.com/Danielk10/moria-firmware-extractor">moria-firmware-extractor</a><br/><br/><b>Documentation:</b> skills/moria/README.md<br/>]]></string>
+
+    <string name="licenses_dialog_title">Open Source Licenses</string>
+    <string name="licenses_dialog_message"><![CDATA[<h3>Moria Firmware Extractor - Open Source Licenses</h3><p>This software integrates native open-source binaries and shared libraries:</p><ul><li><b>Moria</b> &mdash; Apache License 2.0 / BSD (<a href="https://github.com/nmatt0/moria">nmatt0/moria</a>)</li><li><b>libarchive</b> &mdash; BSD 2-Clause License (<a href="https://github.com/libarchive/libarchive">libarchive.org</a>)</li><li><b>bsdunzip</b> &mdash; BSD 2-Clause License</li><li><b>OpenSSL / libcrypto</b> &mdash; Apache License 2.0 (<a href="https://www.openssl.org">openssl.org</a>)</li><li><b>Zstandard (libzstd)</b> &mdash; BSD 3-Clause License (<a href="https://facebook.github.io/zstd/">facebook/zstd</a>)</li><li><b>LZ4 (liblz4)</b> &mdash; BSD 2-Clause License (<a href="https://lz4.org">lz4.org</a>)</li><li><b>XZ / liblzma</b> &mdash; Public Domain / LGPL 2.1 (<a href="https://tukaani.org/xz/">tukaani.org/xz</a>)</li><li><b>zlib</b> &mdash; zlib License (<a href="https://zlib.net">zlib.net</a>)</li><li><b>libxml2</b> &mdash; MIT License (<a href="https://gitlab.gnome.org/GNOME/libxml2">xmlsoft.org</a>)</li><li><b>libiconv &amp; libcharset</b> &mdash; LGPL 2.1</li><li><b>libacl</b> &mdash; LGPL 2.1</li></ul>]]></string>
 </resources>

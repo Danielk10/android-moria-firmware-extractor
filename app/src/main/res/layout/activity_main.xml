@@ -4,14 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dark"
+    android:background="@color/terminal_black"
     tools:context=".ui.activities.MainActivity">
 
+    <!-- Indicador de Carga Inicial -->
     <LinearLayout
+        android:id="@+id/layoutLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/terminal_green" />
+
+        <TextView
+            android:id="@+id/tvLoadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/str_preparando_depe"
+            android:textColor="#E0E0E0"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- UI Principal -->
+    <LinearLayout
+        android:id="@+id/layoutMainUI"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="6dp">
+        android:padding="6dp"
+        android:visibility="gone">
 
         <!-- Fila 1: Selección de Archivo Objetivo y Exportar -->
         <LinearLayout
@@ -231,7 +263,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
+            android:layout_marginBottom="3dp">
 
             <EditText
                 android:id="@+id/etCommand"
@@ -266,70 +298,180 @@
                 app:backgroundTint="@color/btn_tint_blue" />
         </LinearLayout>
 
-        <!-- Barra de Controles Rápidos de Terminal -->
-        <LinearLayout
+        <!-- Barra de Controles Rápidos y Navegación de Terminal -->
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="2dp">
+            android:layout_height="36dp"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:background="@color/terminal_toolbar_bg"
+            android:layout_marginBottom="3dp">
 
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/str_status_ready"
-                android:textColor="#4CAF50"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:layout_gravity="center_vertical"
-                android:singleLine="true" />
-
-            <Button
-                android:id="@+id/btnAbort"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:minHeight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/str_detener"
-                android:textColor="@color/btn_text_color"
-                android:textSize="11sp"
-                android:visibility="gone"
-                app:backgroundTint="@color/btn_tint_darkred"
-                android:layout_marginEnd="4dp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp">
 
-            <Button
-                android:id="@+id/btnCopy"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:minHeight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/str_copiar"
-                android:textColor="@color/btn_text_color"
-                android:textSize="11sp"
-                app:backgroundTint="@color/btn_tint_grey"
-                android:layout_marginEnd="4dp" />
+                <ImageButton
+                    android:id="@+id/btnHistoryPrev"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_arrow_up"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_prev"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp" />
 
-            <Button
-                android:id="@+id/btnClear"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:minHeight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/str_limpiar"
-                android:textColor="@color/btn_text_color"
-                android:textSize="11sp"
-                app:backgroundTint="@color/btn_tint_grey" />
-        </LinearLayout>
+                <ImageButton
+                    android:id="@+id/btnHistoryNext"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_arrow_down"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_next"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp" />
+
+                <ImageButton
+                    android:id="@+id/btnArrowLeft"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_arrow_left"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_left"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp" />
+
+                <ImageButton
+                    android:id="@+id/btnArrowRight"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_arrow_right"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_right"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp" />
+
+                <ImageButton
+                    android:id="@+id/btnTab"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_tab"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_tab"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp" />
+
+                <ImageButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_delete"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_delete"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp" />
+
+                <ImageButton
+                    android:id="@+id/btnPaste"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_paste"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_paste"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp" />
+
+                <ImageButton
+                    android:id="@+id/btnCopy"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_copy"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_copy"
+                    app:tint="@color/terminal_green"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="2dp" />
+
+                <Button
+                    android:id="@+id/btnClear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:minHeight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/str_limpiar"
+                    android:textColor="@color/btn_text_color"
+                    android:textSize="11sp"
+                    app:backgroundTint="@color/btn_tint_grey"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp" />
+
+                <ImageButton
+                    android:id="@+id/btnAbort"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerInside"
+                    android:padding="5dp"
+                    android:focusable="false"
+                    android:src="@drawable/ic_stop"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/terminal_cd_abort"
+                    android:visibility="gone"
+                    app:tint="@color/error"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_status_ready"
+                    android:textColor="#4CAF50"
+                    android:textStyle="bold"
+                    android:textSize="11sp"
+                    android:singleLine="true"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="4dp" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <!-- Consola de Salida UNIX / Terminal -->
         <com.diamon.moria.ui.views.LogScrollView
@@ -337,7 +479,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.0"
-            android:background="#0A0E17"
+            android:background="@color/terminal_black"
             android:descendantFocusability="blocksDescendants"
             android:padding="6dp">
 
@@ -348,7 +490,7 @@
                 android:fontFamily="monospace"
                 android:lineSpacingExtra="2dp"
                 android:longClickable="true"
-                android:textColor="#00FF00"
+                android:textColor="@color/terminal_green"
                 android:textIsSelectable="true"
                 android:textSize="12sp"
                 android:text="--- Moria Firmware Extractor Terminal ---\nType 'help' for available commands.\n\n" />

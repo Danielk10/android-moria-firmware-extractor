@@ -6,8 +6,11 @@
     <string name="menu_export_downloads">Exportar Archivos a Descargas</string>
     <string name="menu_copy_logs">Copiar Registros al Portapapeles</string>
     <string name="menu_clear_terminal">Limpiar Terminal</string>
+    <string name="menu_licenses">Licencias de Código Abierto</string>
+    <string name="menu_policy">Políticas de Privacidad</string>
+    <string name="menu_about">Acerca de</string>
     <string name="str_polticas_de_pri">Políticas de Privacidad</string>
-    <string name="str_acerca_de">Acerca de y Licencias</string>
+    <string name="str_acerca_de">Acerca de Moria</string>
     <string name="str_terminal_salida">Consola de Terminal</string>
     <string name="str_detener">Detener</string>
     <string name="str_limpiar">Limpiar</string>
@@ -24,6 +27,24 @@
     <string name="str_file_import_error">Error al importar archivo: %1$s</string>
     <string name="str_status_ready">Listo</string>
     <string name="str_status_running">Ejecutando: %1$s</string>
+    <string name="str_preparando_depe">Preparando dependencias y runtime nativo...</string>
+    <string name="str_extracting_libs">Extrayendo librerías y componentes del runtime...</string>
+    <string name="str_verifying_dependencies">Verificando dependencias y enlaces simbólicos...</string>
+    <string name="str_log_runtime_ready">Runtime nativo preparado y verificado exitosamente.</string>
+    <string name="str_log_runtime_failed">Aviso: La verificación de dependencias finalizó con advertencias.</string>
+    <string name="toast_work_dir_set">Espacio de trabajo configurado: %1$s</string>
+
+    <!-- Terminal Toolbar Helper Tooltips -->
+    <string name="terminal_cd_prev">Comando anterior en el historial</string>
+    <string name="terminal_cd_next">Siguiente comando en el historial</string>
+    <string name="terminal_cd_left">Mover cursor a la izquierda</string>
+    <string name="terminal_cd_right">Mover cursor a la derecha</string>
+    <string name="terminal_cd_tab">Insertar tabulación (4 espacios)</string>
+    <string name="terminal_cd_delete">Borrar carácter (Retroceso)</string>
+    <string name="terminal_cd_paste">Pegar del portapapeles</string>
+    <string name="terminal_cd_copy">Copiar registros al portapapeles</string>
+    <string name="terminal_cd_clear">Limpiar pantalla de la terminal</string>
+    <string name="terminal_cd_abort">Detener proceso en ejecución</string>
 
     <!-- UI Buttons & Controls for Moria -->
     <string name="btn_select_target">Seleccionar Firmware</string>
@@ -39,5 +60,9 @@
     <string name="target_selected">Objetivo: %1$s (%2$s)</string>
     <string name="select_target_prompt">Seleccione primero un archivo de firmware.</string>
 
-    <string name="str_about_html"><![CDATA[<h2>Moria Firmware Extractor</h2><p>Aplicación Android avanzada para extracción forense de firmware, desempaquetado de contenedores, descompresión de imágenes y hacking electrónico mediante <b>moria</b> nativo y <b>libarchive</b>.</p><hr/><b>Licencia del proyecto:</b> Apache 2.0<br/><b>Autor:</b> Daniel Elias Diamon Vazquez<br/><b>GitHub:</b> <a href="https://github.com/Danielk10/moria-firmware-extractor">moria-firmware-extractor</a><br/><br/><b>Componentes y Bibliotecas de Terceros:</b><br/>• <a href="https://github.com/nmatt0/moria">moria</a> por nmatt0 (Apache 2.0 / BSD)<br/>• <a href="https://github.com/libarchive/libarchive">libarchive</a> (BSD 2-Clause)<br/>• <b>bsdunzip</b> (BSD 2-Clause)<br/>• Runtimes de compresión: lz4, lzma, zlib, zstd, openssl crypto, xml2, acl.<br/>]]></string>
+    <!-- About & Licenses Dialogs -->
+    <string name="str_about_html"><![CDATA[<h2>Moria Firmware Extractor</h2><p>Aplicación avanzada para extracción forense de firmware, desempaquetado de contenedores, descompresión de imágenes y hacking electrónico mediante <b>moria</b> nativo y <b>libarchive</b>.</p><p><b>Flujo de Trabajo (Pipeline):</b><br/><code>moria -e firmware.bin &rarr; mithril firmware.bin.extracted/</code></p><hr/><b>Licencia del proyecto:</b> Apache 2.0<br/><b>Autor:</b> Daniel Elias Diamon Vazquez<br/><b>GitHub:</b> <a href="https://github.com/Danielk10/moria-firmware-extractor">moria-firmware-extractor</a><br/><br/><b>Documentación:</b> skills/moria/README.md<br/>]]></string>
+
+    <string name="licenses_dialog_title">Licencias de Código Abierto</string>
+    <string name="licenses_dialog_message"><![CDATA[<h3>Moria Firmware Extractor - Licencias de Código Abierto</h3><p>Este software integra los siguientes binarios y bibliotecas de código abierto:</p><ul><li><b>Moria</b> &mdash; Apache License 2.0 / BSD (<a href="https://github.com/nmatt0/moria">nmatt0/moria</a>)</li><li><b>libarchive</b> &mdash; Licencia BSD 2-Cláusulas (<a href="https://github.com/libarchive/libarchive">libarchive.org</a>)</li><li><b>bsdunzip</b> &mdash; Licencia BSD 2-Cláusulas</li><li><b>OpenSSL / libcrypto</b> &mdash; Licencia Apache 2.0 (<a href="https://www.openssl.org">openssl.org</a>)</li><li><b>Zstandard (libzstd)</b> &mdash; Licencia BSD 3-Cláusulas (<a href="https://facebook.github.io/zstd/">facebook/zstd</a>)</li><li><b>LZ4 (liblz4)</b> &mdash; Licencia BSD 2-Cláusulas (<a href="https://lz4.org">lz4.org</a>)</li><li><b>XZ / liblzma</b> &mdash; Dominio Público / LGPL 2.1 (<a href="https://tukaani.org/xz/">tukaani.org/xz</a>)</li><li><b>zlib</b> &mdash; Licencia zlib (<a href="https://zlib.net">zlib.net</a>)</li><li><b>libxml2</b> &mdash; Licencia MIT (<a href="https://gitlab.gnome.org/GNOME/libxml2">xmlsoft.org</a>)</li><li><b>libiconv y libcharset</b> &mdash; Licencia LGPL 2.1</li><li><b>libacl</b> &mdash; Licencia LGPL 2.1</li></ul>]]></string>
 </resources>
