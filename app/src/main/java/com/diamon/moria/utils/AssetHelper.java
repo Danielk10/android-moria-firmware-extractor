@@ -235,6 +235,10 @@ public class AssetHelper {
         ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libcrypto.so");
         ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libcrypto.so.3");
         ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libiconv.so");
+        ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libicudata.so");
+        ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libicudata.so.78");
+        ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libicuuc.so");
+        ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libicuuc.so.78");
         ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libcharset.so");
         ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libxml2.so");
         ok &= linkRuntimeSoname(usrLib, nativeLibDir, "libxml2.so.16");
