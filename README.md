@@ -288,7 +288,7 @@ chmod 700 build_libarchive_moria_custom.sh build_moria_custom.sh
   Repositorio oficial: [https://github.com/nmatt0/moria](https://github.com/nmatt0/moria) &bull; **Licencia MIT**
 
 ### 📱 Desarrollador de la Versión y Adaptación para Android
-- **Danielk10** — [GitHub: @Danielk10](https://github.com/Danielk10) — [danielpdiamon@gmail.com](mailto:danielpdiamon@gmail.com)  
+- **Danielk10** — [GitHub: @Danielk10](https://github.com/Danielk10)  
   *Desarrollo de la interfaz táctil, terminal sandbox UNIX, integración JNI y empaquetado móvil.*
 
 ### 📄 Licencia del Proyecto Android
