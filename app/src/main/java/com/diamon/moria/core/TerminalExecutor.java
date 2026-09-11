@@ -3,6 +3,7 @@ package com.diamon.moria.core;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.PowerManager;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -44,6 +45,7 @@ public class TerminalExecutor {
 
     private File currentWorkDir;
     private volatile Process currentProcess;
+    private PowerManager.WakeLock wakeLock;
 
     public TerminalExecutor(Context context, Callback callback) {
         this.context = context;
@@ -66,7 +68,30 @@ public class TerminalExecutor {
         return p != null && p.isAlive();
     }
 
+    private synchronized void acquireWakeLock() {
+        if (wakeLock == null) {
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            if (pm != null) {
+                wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, context.getPackageName() + ":ExecutionWakeLock");
+                wakeLock.setReferenceCounted(false);
+            }
+        }
+        if (wakeLock != null && !wakeLock.isHeld()) {
+            wakeLock.acquire(30 * 60 * 1000L); // 30 min safety timeout
+        }
+    }
+
+    private synchronized void releaseWakeLock() {
+        if (wakeLock != null && wakeLock.isHeld()) {
+            try {
+                wakeLock.release();
+            } catch (Exception ignored) {
+            }
+        }
+    }
+
     public synchronized void abort() {
+        releaseWakeLock();
         Process p = currentProcess;
         if (p != null) {
             try {
@@ -77,6 +102,11 @@ public class TerminalExecutor {
             }
             currentProcess = null;
         }
+    }
+
+    public synchronized void destroy() {
+        abort();
+        releaseWakeLock();
     }
 
     public void execute(String commandLine) {
@@ -738,10 +768,12 @@ public class TerminalExecutor {
     }
 
     private void postStarted(String command) {
+        acquireWakeLock();
         mainHandler.post(() -> callback.onCommandStarted(command));
     }
 
     private void postFinished(int exitCode) {
+        releaseWakeLock();
         mainHandler.post(() -> callback.onCommandFinished(exitCode));
     }
 }

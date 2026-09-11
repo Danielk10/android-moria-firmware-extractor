@@ -123,6 +123,13 @@ La aplicación combina botones táctiles de ejecución rápida con una terminal 
 4. **Gestión de almacenamiento SAF y Exportación:**
    - Integración nativa con el *Storage Access Framework* (SAF) para importar firmwares desde cualquier proveedor (Drive, SD, descargas).
    - Exportación directa en un clic de los firmwares extraídos a `Downloads/Moria_Firmware/` cumpliendo los estándares de *Scoped Storage* de Android 10 a Android 17+.
+5. **Gestión de Energía y WakeLock en Segundo Plano:**
+   - Integración de `PowerManager.WakeLock` (`PARTIAL_WAKE_LOCK`) en `TerminalExecutor` para evitar que el sistema operativo suspenda la CPU (modo *Doze*) durante descompresiones de firmware prolongadas cuando la pantalla se apaga o se bloquea el terminal.
+   - Liberación automática al completar el proceso (`postFinished`), abortar (`Abort`) o cerrar la aplicación (`onDestroy`), con un temporizador de seguridad de 30 minutos para proteger la batería.
+6. **Matriz de Permisos Completa (Android API 23 a API 37):**
+   - Compatible desde Android 6.0 (Marshmallow) hasta Android 17 / API 37.
+   - Soporta almacenamiento legado (`WRITE_EXTERNAL_STORAGE` en API 23-28 con `requestLegacyExternalStorage="true"` en API 29) y Scoped Storage moderno con `MediaStore.Downloads` en API 29-37.
+   - Permiso `POST_NOTIFICATIONS` configurado para notificaciones del sistema en Android 13+.
 
 ---
 

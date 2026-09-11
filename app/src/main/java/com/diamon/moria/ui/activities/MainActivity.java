@@ -549,4 +549,12 @@ public class MainActivity extends AppCompatActivity implements TerminalExecutor.
     public void onClearRequested() {
         tvLog.setText("");
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (terminalExecutor != null) {
+            terminalExecutor.destroy();
+        }
+    }
 }
